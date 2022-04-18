@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import { SharedModule } from '../shared/shared.module';
 import { LayoutComponent } from './components/layout/layout.component';
+import {NavigationComponent} from "./components/navigation/navigation.component";
 
-const components = [LayoutComponent];
+const components = [LayoutComponent, NavigationComponent];
 
 const routes: Routes = [
   {path: '', component: LayoutComponent, children: [
