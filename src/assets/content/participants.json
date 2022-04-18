@@ -1,0 +1,38 @@
+[
+  {
+    "game_id": 0,
+    "user_ids": [2],
+    "users": [
+      {
+        "id": 2,
+        "first_name": "Anna",
+        "last_name": "Ahmatova",
+        "email": "akh@gmail.com",
+        "telegram": "@anna19",
+        "phone": "+79951234567"
+      }
+    ]
+  },
+  {
+    "game_id": 1,
+    "user_ids": [0,1],
+    "users": [
+      {
+        "id": 0,
+        "first_name": "Aleksander",
+        "last_name": "Pushkin",
+        "email": "apushkin@gmail.com",
+        "telegram": "@push111",
+        "phone": "+79231231212"
+      },
+      {
+        "id": 1,
+        "first_name": "Vladimir",
+        "last_name": "Mayakovsky",
+        "email": "mayakv@gmail.com",
+        "telegram": "@mmmvvv",
+        "phone": "+79131231212"
+      }
+    ]
+  }
+]

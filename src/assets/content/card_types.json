@@ -1,0 +1,12 @@
+[
+  {
+    "id": 0,
+    "name": "CardType1",
+    "code": "card_type_1"
+  },
+  {
+    "id": 1,
+    "name": "CardType2",
+    "code": "card_type_2"
+  }
+]

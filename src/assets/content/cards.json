@@ -1,0 +1,46 @@
+[
+  {
+    "id": 0,
+    "name": "Card1",
+    "description": "some description 1",
+    "type_id": 0,
+    "type": {
+      "id": 0,
+      "name": "CardType1",
+      "code": "card_type_1"
+    }
+  },
+  {
+    "id": 1,
+    "name": "Card2",
+    "description": "some description 2",
+    "type_id": 0,
+    "type": {
+      "id": 0,
+      "name": "CardType1",
+      "code": "card_type_1"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Card3",
+    "description": "some description 3",
+    "type_id": 0,
+    "type": {
+      "id": 0,
+      "name": "CardType1",
+      "code": "card_type_1"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Card4",
+    "description": "some description 4",
+    "type_id": 1,
+    "type": {
+      "id": 1,
+      "name": "CardType2",
+      "code": "card_type_2"
+    }
+  }
+]
