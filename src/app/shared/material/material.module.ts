@@ -1,7 +1,19 @@
 import {NgModule} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button'
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+
+const modules = [MatToolbarModule, MatIconModule, MatButtonModule, MatButtonToggleModule, MatMenuModule,
+  MatDialogModule];
 
 @NgModule({
-  declarations: []
+  declarations: [],
+  imports: modules,
+  exports: modules
 })
 export class MaterialDesignModule {
 }
