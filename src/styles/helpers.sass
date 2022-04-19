@@ -1,0 +1,16 @@
+@mixin size($w, $h: nil)
+  width: $w
+  @if $h != nil
+    height: $h
+  @else
+    height: $w
+
+@mixin fsz($fontSize, $lineHeight: nil)
+  font-size: $fontSize
+  @if $lineHeight != nil
+    line-height: $lineHeight
+
+@mixin textOverflow
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap

@@ -11,7 +11,13 @@ import {CardsListComponent} from "../../../shared/components/cards-list/cards-li
 })
 export class NavigationComponent {
   openDialog() {
-    const dialogRef = this.dialog.open(CardsListComponent);
+    const dialogRef = this.dialog.open(CardsListComponent, {
+      maxWidth: '94vw',
+      maxHeight: '94vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'full-screen-modal'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

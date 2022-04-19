@@ -6,3 +6,11 @@ export interface ICollection<T = any> {
   init?(...params: any): void;
   destroy?(): void;
 }
+
+export interface ICard {
+  id: number;
+  img: string;
+  name?: string;
+  description?: string;
+  selected?: boolean;
+}
