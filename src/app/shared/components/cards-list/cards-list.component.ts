@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {ICard} from "../../../api/models";
 import {CardsListService} from "../../services/cards-list.service";
 import {CardsSelectedListService} from "../../services/cards-selected-list.service";
+import {ConsultationService} from "../../../consultation/services/consultation.service";
 
 @Component({
   selector: 'app-cards-list',
@@ -27,6 +28,7 @@ export class CardsListComponent implements OnInit {
   selectCard(item: ICard): void {
     this.onClose();
     this.selected.selectCard(item);
+    this.consultation.selectedCardHandler(item);
   }
 
   onClose(): void {
@@ -36,6 +38,6 @@ export class CardsListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(public cards: CardsListService, private selected: CardsSelectedListService,
+  constructor(public cards: CardsListService, private selected: CardsSelectedListService, private consultation: ConsultationService,
               @Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<CardsListComponent>) { }
 }

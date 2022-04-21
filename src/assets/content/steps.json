@@ -1,0 +1,34 @@
+[
+  {
+    "id": 0,
+    "title": "Step 1",
+    "description": "Description for step One",
+    "audio": "",
+    "video": "",
+    "consultation": "Text of consultation"
+  },
+  {
+    "id": 1,
+    "title": "Step 2",
+    "description": "Description for step Two",
+    "audio": "",
+    "video": "",
+    "consultation": "Text of consultation"
+  },
+  {
+    "id": 2,
+    "title": "Step 3",
+    "description": "Description for step Three",
+    "audio": "",
+    "video": "",
+    "consultation": "Text of consultation"
+  },
+  {
+    "id": 3,
+    "title": "Step 4",
+    "description": "Description for step Four",
+    "audio": "",
+    "video": "",
+    "consultation": "Text of consultation"
+  }
+]

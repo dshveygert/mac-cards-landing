@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {MatDialog} from '@angular/material/dialog';
-import {CardsListComponent} from "../../../shared/components/cards-list/cards-list.component";
+import {CardsListService} from "../../../shared/services/cards-list.service";
 
 @Component({
   selector: 'app-navigation',
@@ -10,19 +9,6 @@ import {CardsListComponent} from "../../../shared/components/cards-list/cards-li
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent {
-  openDialog() {
-    const dialogRef = this.dialog.open(CardsListComponent, {
-      maxWidth: '94vw',
-      maxHeight: '94vh',
-      height: '100%',
-      width: '100%',
-      panelClass: 'full-screen-modal'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
   //
   // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
   //   .pipe(
@@ -30,5 +16,5 @@ export class NavigationComponent {
   //     shareReplay()
   //   );
 
-  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog) {}
+  constructor(private breakpointObserver: BreakpointObserver, public cards: CardsListService) {}
 }

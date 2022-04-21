@@ -14,3 +14,17 @@ export interface ICard {
   description?: string;
   selected?: boolean;
 }
+
+export interface IStep {
+  id: number;
+  title: string;
+  description: string;
+  audio: string;
+  video: string;
+  consultation: string;
+}
+
+export const enum ILocalStorage {
+  consultation = 'consultation',
+  settings = 'settings'
+}

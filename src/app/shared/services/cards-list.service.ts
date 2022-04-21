@@ -5,6 +5,8 @@ import {ICard} from '../../api/models';
 import {fullUnsubscribe} from '../../../utils';
 import {Collection} from "../../../utils/collection";
 import {SettingsService} from "../../routing/services/settings.service";
+import {CardsListComponent} from "../components/cards-list/cards-list.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +27,19 @@ export class CardsListService extends Collection<ICard[]> {
     return '165:254';
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(CardsListComponent, {
+      maxWidth: '94vw',
+      maxHeight: '94vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'full-screen-modal'
+    });
+  }
+
   init(): void {
     this.dataSub.push(this.dataRequest().pipe(tap(cards => {
-      console.log('cards', cards);
-      this.data = [...cards, ...cards, ...cards, ...cards, ...cards, ...cards, ...cards, ...cards, ...cards, ...cards];
+      this.data = cards;
     })).subscribe());
   }
 
@@ -38,7 +49,7 @@ export class CardsListService extends Collection<ICard[]> {
   }
 
 
-  constructor(private http: HttpClient, private settings: SettingsService) {
+  constructor(private http: HttpClient, private settings: SettingsService, private dialog: MatDialog) {
     super();
   }
 }

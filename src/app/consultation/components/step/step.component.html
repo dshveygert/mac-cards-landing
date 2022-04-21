@@ -1,0 +1,26 @@
+<mat-card class="example-card" [id]="stepId">
+  <mat-card-header>
+    <mat-card-title>{{step.title}}</mat-card-title>
+    <mat-card-subtitle>{{step.description}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div *ngIf="isCardSelected; else emptyCard">
+      <div class="card">
+        <img [src]="cardImage" [alt]="card.name">
+      </div>
+    </div>
+    <ng-template #emptyCard>
+      <div class="card card--empty">
+        <div class="text">
+          <button mat-button class="cards-button" (click)="selectCardHandler()">Выберите карту</button>
+        </div>
+      </div>
+    </ng-template>
+    <p>{{step.consultation}}</p>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="isShowNextButton">
+    <button mat-raised-button class="cards-button" (click)="nextStepHandler()">Следующий шаг</button>
+  </mat-card-actions>
+</mat-card>

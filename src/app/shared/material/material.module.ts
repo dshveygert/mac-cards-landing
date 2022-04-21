@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button'
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -9,7 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 const modules = [MatToolbarModule, MatIconModule, MatButtonModule, MatButtonToggleModule, MatMenuModule,
-  MatDialogModule, MatGridListModule];
+  MatDialogModule, MatGridListModule, MatCardModule];
 
 @NgModule({
   declarations: [],
