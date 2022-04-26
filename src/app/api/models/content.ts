@@ -31,4 +31,7 @@ export const enum ILocalStorage {
 
 export interface IDocConfig {
   host: string;
+  administrator: string;
+  inn: string;
+  email: string;
 }
