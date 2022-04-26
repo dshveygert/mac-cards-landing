@@ -28,3 +28,7 @@ export const enum ILocalStorage {
   consultation = 'consultation',
   settings = 'settings'
 }
+
+export interface IDocConfig {
+  host: string;
+}

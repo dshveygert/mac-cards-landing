@@ -20,7 +20,7 @@
     <p>{{step.consultation}}</p>
   </mat-card-content>
 
-  <mat-card-actions *ngIf="isShowNextButton">
+  <div class="button-wrapper" *ngIf="isShowNextButton">
     <button mat-raised-button class="cards-button" (click)="nextStepHandler()">Следующий шаг</button>
-  </mat-card-actions>
+  </div>
 </mat-card>

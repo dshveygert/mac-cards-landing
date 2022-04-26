@@ -1,8 +1,8 @@
 <h1>Консультация заголовок</h1>
 <ng-container *ngIf="currentStep$|async as currentStep">
-  <ng-container *ngIf="isStart(currentStep); else stepCards">
+  <div class="button-wrapper" *ngIf="isStart(currentStep); else stepCards">
     <button mat-raised-button class="cards-button" aria-label="Начало конусльтации" (click)="nextStep(-1)">Начать</button>
-  </ng-container>
+  </div>
   <ng-template #stepCards>
     <div *ngFor="let step of steps.data$|async;trackBy: consultation.trackByFn" class="step-wrapper">
       <div *ngIf="consultation.isStepCompleted(step)" class="step">
