@@ -6,7 +6,7 @@
   <mat-grid-list cols="4" [rowHeight]="cards.cardProportion" *ngIf="cardsList$|async as cardsList">
     <mat-grid-tile *ngFor="let item of cardsList; let index = index;" (click)="selectCard(item)">
       <div class="card-item">
-        <img [src]="cardImage(item)" [alt]="item.name" />
+        <img [src]="cardImage(item)" [alt]="item.name"  loading="lazy" />
         <div class="index">{{index + 1}}</div>
       </div>
     </mat-grid-tile>

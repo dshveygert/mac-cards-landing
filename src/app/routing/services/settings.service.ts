@@ -14,5 +14,9 @@ export class SettingsService {
     }
   }
 
+  public scrollTop(offset = 56): void {
+    window.scrollTo({top: offset, behavior: 'smooth'});
+  }
+
   constructor() { }
 }

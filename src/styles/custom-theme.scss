@@ -12,7 +12,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$mac-cards-landing-primary: mat.define-palette(mat.$indigo-palette);
+$mac-cards-landing-primary: mat.define-palette(mat.$deep-purple-palette);
 $mac-cards-landing-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -35,4 +35,64 @@ $mac-cards-landing-theme: mat.define-light-theme((
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #fff;
+}
+.mat-button,
+.mat-raised-button {
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+  max-width: 100%;
+  width: 100%;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  height: 3.375rem;
+  line-height: 3.375rem;
+  padding: 0 1rem !important;
+  font-size: 0.75em;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.075rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  direction: var(--site-language-direction);
+  background-color: #7163D6;
+  color: #FFFFFF;
+  transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+.mat-raised-button {
+  background-color: rgba(113,99,214,0.2);
+  border: 2px solid #7163D6 !important;
+}
+
+.upper {
+  text-transform: uppercase;
+}
+
+.mat-button.content-width,
+.mat-raised-button.content-width {
+  width: fit-content;
+  padding: 0 2rem !important;
+}
+
+a {
+  color: #7163D6;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+*::selection {
+  background: #7E57C2;
+  color: #fff !important;
+}
+*::-moz-selection {
+  background: #7E57C2;
+  color: #fff !important;
+}
