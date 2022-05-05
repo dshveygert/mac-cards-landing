@@ -1,26 +1,39 @@
 <mat-card class="example-card" [id]="stepId">
   <mat-card-header>
-    <mat-card-title>{{step.title}}</mat-card-title>
-    <mat-card-subtitle>{{step.description}}</mat-card-subtitle>
+    <mat-card-title><h3>{{step.title}}</h3></mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
     <div *ngIf="isCardSelected; else emptyCard">
       <div class="card">
-        <img [src]="cardImage" [alt]="card.name">
+        <div class="img">
+          <img [src]="cardImage" [alt]="card.name">
+        </div>
+        <p>{{step.consultation}}</p>
+      </div>
+
+      <div class="divider"></div>
+      <div class="card">
+        <p *ngIf="!!step.sub_question">{{step.sub_question}}</p>
+        <app-form-main-question [formCode]="step.form_code"></app-form-main-question>
+      </div>
+      <div class="divider"></div>
+      <div class="card">
+        <p *ngIf="!!step.action">{{step.action}}</p>
       </div>
     </div>
+
     <ng-template #emptyCard>
       <div class="card card--empty">
-        <div class="text">
-          <button mat-button class="cards-button" (click)="selectCardHandler()">Выберите карту</button>
+        <p>{{step.description}}</p>
+        <div class="button-wrapper">
+          <button mat-button class="cards-button upper" (click)="selectCardHandler()">Выберите карту</button>
         </div>
       </div>
     </ng-template>
-    <p>{{step.consultation}}</p>
   </mat-card-content>
 
   <div class="button-wrapper" *ngIf="isShowNextButton">
-    <button mat-raised-button class="cards-button" (click)="nextStepHandler()">Следующий шаг</button>
+    <button mat-raised-button class="cards-button upper" (click)="nextStepHandler()">{{next}}</button>
   </div>
 </mat-card>

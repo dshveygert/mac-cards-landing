@@ -7,6 +7,10 @@ export interface ICollection<T = any> {
   destroy?(): void;
 }
 
+export type ICardCollection = {
+  [key in ECardType]: ICard[];
+};
+
 export interface ICard {
   id: number;
   img: string;
@@ -22,10 +26,21 @@ export interface IStep {
   audio: string;
   video: string;
   consultation: string;
+  sub_question?: string;
+  card_type: ECardType;
+  form_code?: string;
+  action?: string;
+  next?: string;
 }
 
-export const enum ILocalStorage {
+export const enum ECardType {
+  whale = 'whale',
+  merlin = 'merlin'
+}
+
+export const enum ELocalStorage {
   consultation = 'consultation',
+  preparation = 'preparation',
   settings = 'settings'
 }
 

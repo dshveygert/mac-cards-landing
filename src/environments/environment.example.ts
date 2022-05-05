@@ -5,7 +5,11 @@
 export const environment = {
   production: false,
   host: 'https://site.com',
-  feedback: 'feedback@site.com',
+  feedback: {
+    email: 'feedback@site.com',
+    telegram: '@telegram',
+    whatsapp: '+12345678900'
+  },
   terms: {
     administrator: 'John Doe',
     inn: '000123456789'

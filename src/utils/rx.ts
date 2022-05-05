@@ -5,6 +5,5 @@ export function fullUnsubscribe(list: SubscriptionLike[]): void {
   do {
     list[i]?.unsubscribe();
     i--;
-    console.log(i);
   } while (i > 0);
 }

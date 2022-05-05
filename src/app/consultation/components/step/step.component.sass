@@ -1,7 +1,33 @@
+@import "src/styles/helpers"
+.example-card
+  background-color: transparent
+  border: solid 1px rgba(255,255,255,0.071)
+  box-shadow: 0 0 28px -2px rgba(126, 86,194,0.5)
+  margin-bottom: 4rem
+  .button-wrapper
+    width: 100%
+  button
+    font-size: 12px !important
+  h3
+    color: #ffffff
+  p
+    @include fsz(1em !important, 1.8 !important)
+    font-weight: 300
+
 .card
   display: flex
   align-items: center
   flex-direction: column
-  height: 50vh
-  img
-    height: 100%
+  font-size: 16px
+  //height: 50vh
+  .img
+    border-radius: 4px 0 0 0
+    border: solid 2px #7E57C2
+    border-left: none
+    border-top: none
+    overflow: hidden
+    img
+      width: 100%
+
+  app-form-main-question
+    width: 100%

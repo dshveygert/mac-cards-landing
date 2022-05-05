@@ -9,3 +9,13 @@ export interface IConsultation {
   currentStep: IStep;
   log: ICardByStep[];
 }
+
+export interface IPreparation {
+  uuid: string;
+  answer: IPreparationAnswer;
+}
+
+export interface IPreparationAnswer {
+  form_code: string;
+  value: string;
+}

@@ -1,9 +1,10 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {StepsListService} from "../../services/steps-list.service";
-import {ConsultationService} from "../../services/consultation.service";
 import {fullUnsubscribe} from 'src/utils';
 import {SubscriptionLike, tap} from 'rxjs';
+import {StepsListService} from "../../services/steps-list.service";
+import {ConsultationService} from "../../services/consultation.service";
+import {PreparationService} from "../../services/preparation.service";
 
 @Component({
   selector: 'app-consultation-layout-page',
@@ -17,6 +18,7 @@ export class ConsultationLayoutPageComponent implements OnInit, OnDestroy {
     this.steps.init();
     this.dataSub.push(this.route.params.pipe(tap(({consultationSession}) => {
       this.consultation.init(consultationSession);
+      this.preparation.init(consultationSession);
     })).subscribe());
   }
   ngOnDestroy(): void {
@@ -25,5 +27,6 @@ export class ConsultationLayoutPageComponent implements OnInit, OnDestroy {
     fullUnsubscribe(this.dataSub);
   }
 
-  constructor(private steps: StepsListService, private route: ActivatedRoute, private consultation: ConsultationService) { }
+  constructor(private steps: StepsListService, private route: ActivatedRoute,
+              private consultation: ConsultationService, private preparation: PreparationService) { }
 }

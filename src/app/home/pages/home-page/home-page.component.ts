@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.sass']
+  styleUrls: ['./home-page.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomePageComponent {
   get price(): number {
@@ -12,12 +14,12 @@ export class HomePageComponent {
   }
 
   start(): void {
-
+    this.router.navigate([`/consultation/100500/preparation`]).then();
   }
 
   getConsultation(): void {
-
+    this.router.navigate([`/consultation/100500/preparation`]).then();
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 }

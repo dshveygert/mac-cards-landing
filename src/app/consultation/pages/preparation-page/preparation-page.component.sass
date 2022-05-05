@@ -1,0 +1,24 @@
+@import "/src/styles/helpers"
+
+.card-img
+  min-height: 277px
+  box-shadow: inset 0 0 12px 0 rgba(0,0,0,0.7)
+  background-size: cover
+  background-position: center
+  background-repeat: no-repeat
+  &.hands
+    background-image: url('/assets/content/images/cards/87_.jpg')
+  &.elephants
+    background-image: url('/assets/content/images/cards/19_.jpg')
+.price
+  display: flex
+  align-items: baseline
+  .value
+    @include fsz(2em, 2)
+    font-weight: 700
+    margin-right: 10px
+  .currency
+    @include fsz(1.2em, 2)
+
+.button-wrapper
+  margin-bottom: 4rem

@@ -96,3 +96,26 @@ a:hover {
   background: #7E57C2;
   color: #fff !important;
 }
+
+.mat-form-field {
+  width: 100%;
+  &-label {
+    color: rgba(255,255,255,0.71);
+    white-space: normal !important;
+  }
+  &-invalid {
+    .mat-form-field-label {
+      color: #ffe5ee !important;
+    }
+  }
+}
+.mat-form-field-appearance-fill {
+  .mat-form-field-flex {
+    background: rgba(179, 167,219, 0.7);
+    color: rgba(255,255,255,0.71);
+    textarea {
+      min-height: 150px;
+      caret-color: white;
+    }
+  }
+}

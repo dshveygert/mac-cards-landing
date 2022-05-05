@@ -18,7 +18,7 @@ export class StepComponent implements AfterViewInit {
 
   get cardImage(): string {
     const {img} = this.card;
-    return `${this.cards.cardImagePath}/${img ? img : 'empty.png'}`
+    return `${this.cards.cardImagePath}/${this.step.card_type}/${img ? img : 'empty.png'}`;
   }
 
   get isCardSelected(): boolean {
@@ -26,11 +26,15 @@ export class StepComponent implements AfterViewInit {
   }
 
   get isShowNextButton(): boolean {
-    return this.currentStep?.id === this.step.id && this.isCardSelected && this.step?.id < 3;
+    return this.currentStep?.id === this.step.id && this.isCardSelected && this.step?.id < 4;
   }
 
   get stepId(): string {
     return `step${this.step.id}`;
+  }
+
+  get next(): string {
+    return this.step.next ?? 'Следующий шаг';
   }
 
   selectCardHandler(): void {

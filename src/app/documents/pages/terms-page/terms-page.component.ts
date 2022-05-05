@@ -12,7 +12,7 @@ export class TermsPageComponent implements OnInit {
     host: environment.host,
     administrator: environment.terms.administrator,
     inn: environment.terms.inn,
-    email: environment.feedback
+    email: environment.feedback.email
   };
 
   constructor() { }

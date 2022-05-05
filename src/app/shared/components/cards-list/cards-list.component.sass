@@ -1,13 +1,20 @@
 @import "/src/styles/helpers"
 
+.close
+  background: #8D7DFF
 mat-grid-list
   position: relative
   display: block
   width: 100%
 mat-grid-tile
-  background: lightblue
+  background: #7E57C2
+  opacity: 0.7
+  transition: opacity 0.5s
+  &:hover
+    opacity: 1
   .card
     &-item
+      cursor: pointer
       img
         width: 100%
         height: auto
@@ -15,5 +22,8 @@ mat-grid-tile
         position: absolute
         z-index: 1
         bottom: 3px
-        right: 3px
-        @include fsz(12px)
+        right: 9px
+        @include fsz(22px)
+        font-weight: 800
+        opacity: 0.3
+        color: #ffffff

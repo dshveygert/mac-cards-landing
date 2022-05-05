@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {Observable} from "rxjs";
-import {ICard} from "../../../api/models";
+import {filter, map, Observable} from "rxjs";
+import {ECardType, ICard} from "../../../api/models";
 import {CardsListService} from "../../services/cards-list.service";
 import {CardsSelectedListService} from "../../services/cards-selected-list.service";
 import {ConsultationService} from "../../../consultation/services/consultation.service";
@@ -13,16 +13,28 @@ import {ConsultationService} from "../../../consultation/services/consultation.s
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardsListComponent implements OnInit {
-  public cardsList: ICard[];
-  public item: ICard;
+  cardsList: ICard[];
+  item: ICard;
+  cardsInRow = 8;
 
   get cardsList$(): Observable<ICard[]> {
-    return this.cards.data$;
+    return this.cards.data$.pipe(filter(d => !!d), map(d => d[this.cardType]));
+  }
+
+  get cardType(): ECardType {
+    return this.data?.cardType;
+  }
+
+  get viewCard(): boolean {
+    return this.data?.viewCard;
   }
 
   cardImage(item: ICard): string {
     const {img} = item;
-    return `${this.cards.cardImagePath}/${img ? img : 'empty.png'}`;
+    const cardImg = this.viewCard ? img ? img : 'empty.png' : `downFace_${this.cardType}.svg`;
+    console.log('this.viewCard', this.viewCard);
+    console.log('cardImg', cardImg);
+    return `${this.cards.cardImagePath}/${this.cardType}/${cardImg}`;
   }
 
   selectCard(item: ICard): void {

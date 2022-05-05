@@ -1,20 +1,34 @@
-<h1>Консультация заголовок</h1>
-<ng-container *ngIf="currentStep$|async as currentStep">
-  <div class="button-wrapper" *ngIf="isStart(currentStep); else stepCards">
-    <button mat-raised-button class="cards-button" aria-label="Начало конусльтации" (click)="nextStep(-1)">Начать</button>
+<div class="content-wrapper">
+  <div class="title">
+    <h2>Тема для работы:</h2>
+    <p class="theme">{{workTheme$|async}}</p>
   </div>
-  <ng-template #stepCards>
-    <div *ngFor="let step of steps.data$|async;trackBy: consultation.trackByFn" class="step-wrapper">
-      <div *ngIf="consultation.isStepCompleted(step)" class="step">
-        <app-step
-          [step]="step"
-          [currentStep]="currentStep"
-          [card]="card(step)"
-          (nextStep)="nextStep(step.id)"
-          (selectCard)="selectCard()"
-          (scrollToStep)="scrollToStep(currentStep)"
-        ></app-step>
-      </div>
+
+  <div class="divider"></div>
+
+  <div class="content-block">
+    <h3>Начнем?</h3>
+    <p>Я Вас поздравляю с определением важной для Вас темы (целью, запросом) на эекспресс-консультацию с помощью МАКарт!</p>
+    <p>Если Вы готовы к началу экспресс-консультации, то нажимаете «ШАГ 1»</p>
+  </div>
+
+  <ng-container *ngIf="currentStep$|async as currentStep">
+    <div class="button-wrapper" *ngIf="isStart(currentStep); else stepCards">
+      <button mat-button class="cards-button upper" aria-label="Начало конусльтации" (click)="nextStep(-1)">Шаг 1</button>
     </div>
-  </ng-template>
-</ng-container>
+    <ng-template #stepCards>
+      <div *ngFor="let step of steps.data$|async;trackBy: consultation.trackByFn" class="step-wrapper">
+        <div *ngIf="consultation.isStepCompleted(step)" class="step">
+          <app-step
+            [step]="step"
+            [currentStep]="currentStep"
+            [card]="card(step)"
+            (nextStep)="nextStep(step.id)"
+            (selectCard)="selectCard(step.card_type)"
+            (scrollToStep)="scrollToStep(currentStep)"
+          ></app-step>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>
