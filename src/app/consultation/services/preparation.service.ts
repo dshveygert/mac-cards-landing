@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {map, Observable, SubscriptionLike} from 'rxjs';
-import {localStorageGetItem, localStorageSetItem} from '../../../utils/localStorage';
+import {CryptoData, localStorageGetItem, localStorageSetItem} from '../../../utils/localStorage';
 import {Collection} from "../../../utils/collection";
 import {IPreparation, ELocalStorage, IPreparationAnswer} from "../../api/models";
 import {fullUnsubscribe} from "../../../utils";
@@ -11,6 +11,7 @@ import {fullUnsubscribe} from "../../../utils";
 export class PreparationService extends Collection<IPreparation[]> {
   private dataSub: SubscriptionLike[] = [];
   private consultationSession: string;
+  private crypto = new CryptoData(ELocalStorage.preparation);
 
   private dataEmit(answer: IPreparationAnswer): void {
     const preparation: IPreparation = {
@@ -23,7 +24,7 @@ export class PreparationService extends Collection<IPreparation[]> {
     } else {
       this.data = [...this.data, preparation];
     }
-    localStorageSetItem(ELocalStorage.preparation, JSON.stringify(this.data));
+    localStorageSetItem(ELocalStorage.preparation, JSON.stringify(this.data), this.crypto);
   }
 
   answerByFormCode$(code: string): Observable<IPreparationAnswer | undefined> {
@@ -36,7 +37,7 @@ export class PreparationService extends Collection<IPreparation[]> {
 
   init(consultationSession: string): void {
     this.consultationSession = consultationSession;
-    const preparation = localStorageGetItem(ELocalStorage.preparation);
+    const preparation = localStorageGetItem(ELocalStorage.preparation, this.crypto);
     this.data = preparation ? JSON.parse(preparation) : [];
   }
 

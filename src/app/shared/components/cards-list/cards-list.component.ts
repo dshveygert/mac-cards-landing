@@ -32,8 +32,6 @@ export class CardsListComponent implements OnInit {
   cardImage(item: ICard): string {
     const {img} = item;
     const cardImg = this.viewCard ? img ? img : 'empty.png' : `downFace_${this.cardType}.svg`;
-    console.log('this.viewCard', this.viewCard);
-    console.log('cardImg', cardImg);
     return `${this.cards.cardImagePath}/${this.cardType}/${cardImg}`;
   }
 

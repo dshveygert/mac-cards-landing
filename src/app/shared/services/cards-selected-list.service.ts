@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {ICard} from '../../api/models';
-import {Collection} from "../../../utils/collection";
-import {SettingsService} from "../../routing/services/settings.service";
+import { ICard } from '../../api/models';
+import { Collection } from "../../../utils/collection";
+import { SettingsService } from "../../routing/services/settings.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,6 @@ export class CardsSelectedListService extends Collection<ICard[]> {
   selectCard(item: ICard): void {
     const current = !!this._data ? this._data : [];
     this.data = [...current, item];
-    console.log('CardsSelectedListService', this.data);
   }
 
   get cardImagePath(): string {
