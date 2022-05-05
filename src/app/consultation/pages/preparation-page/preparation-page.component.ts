@@ -1,6 +1,7 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {SettingsService} from "../../../routing/services/settings.service";
+import {ConsultationMenuService} from "../../services/consultation-menu.service";
 
 @Component({
   selector: 'app-preparation-page',
@@ -11,6 +12,7 @@ import {SettingsService} from "../../../routing/services/settings.service";
 export class PreparationPageComponent implements AfterViewInit {
 
   goToSteps(data: any): void {
+    this.m.savePage('cards');
     this.router.navigate([`/consultation/100500/cards`]).then();
   }
 
@@ -18,5 +20,6 @@ export class PreparationPageComponent implements AfterViewInit {
     this.settings.scrollTop(0);
   }
 
-  constructor(private settings: SettingsService, private router: Router) { }
+  constructor(private settings: SettingsService, private router: Router,
+              private m: ConsultationMenuService) { }
 }

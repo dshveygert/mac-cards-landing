@@ -41,7 +41,8 @@ export const enum ECardType {
 export const enum ELocalStorage {
   consultation = 'consultation',
   preparation = 'preparation',
-  settings = 'settings'
+  settings = 'settings',
+  consultation_menu = 'cmenu'
 }
 
 export interface IDocConfig {

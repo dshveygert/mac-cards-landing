@@ -19,3 +19,5 @@ export interface IPreparationAnswer {
   form_code: string;
   value: string;
 }
+
+export type IConsultationMenu = 'final' | 'cards' | 'preparation';

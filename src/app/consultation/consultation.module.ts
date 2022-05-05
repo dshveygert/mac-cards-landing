@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule , Routes} from "@angular/router";
 import { SharedModule } from "../shared/shared.module";
 import { StepsListService } from "./services/steps-list.service";
+import { ConsultationMenuService } from "./services/consultation-menu.service";
 import { ConsultationLayoutPageComponent } from './pages/consultation-layout-page/consultation-layout-page.component';
 import { ConsultationPageComponent } from './pages/consultation-page/consultation-page.component';
 import { StepComponent } from "./components/step/step.component";
@@ -9,9 +10,10 @@ import { PreparationPageComponent } from './pages/preparation-page/preparation-p
 import { FormMainQuestionComponent } from "./components/form/form-main-question/form-main-question.component";
 import { FinalPageComponent } from "./pages/final-page/final-page.component";
 import { ThanksPageComponent } from './pages/thanks-page/thanks-page.component';
+import { ConsultationNavigationMenuComponent } from "./components/consultation-navigation-menu/consultation-navigation-menu.component";
 
 const components = [ConsultationLayoutPageComponent, ConsultationPageComponent, StepComponent, PreparationPageComponent,
-  FormMainQuestionComponent, FinalPageComponent, ThanksPageComponent];
+  FormMainQuestionComponent, FinalPageComponent, ThanksPageComponent, ConsultationNavigationMenuComponent];
 const routes: Routes = [
   {path: ':consultationSession', component: ConsultationLayoutPageComponent, children: [
     // {path: '', redirectTo: 'cards', pathMatch: 'full'},
@@ -26,6 +28,6 @@ const routes: Routes = [
 @NgModule({
   declarations: components,
   imports: [RouterModule.forChild(routes), SharedModule],
-  providers: [StepsListService]
+  providers: [StepsListService, ConsultationMenuService]
 })
 export class ConsultationModule { }

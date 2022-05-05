@@ -7,6 +7,7 @@ import {CardsListService} from "../../../shared/services/cards-list.service";
 import {SettingsService} from "../../../routing/services/settings.service";
 import {PreparationService} from "../../services/preparation.service";
 import {Router} from "@angular/router";
+import {ConsultationMenuService} from "../../services/consultation-menu.service";
 
 @Component({
   selector: 'app-consultation-page',
@@ -28,6 +29,7 @@ export class ConsultationPageComponent implements AfterViewInit {
 
   nextStep(step = 0): void {
     if (step === 3) {
+      this.m.savePage('final');
       this.router.navigate([`/consultation/100500/final`]).then();
       return;
     }
@@ -56,5 +58,6 @@ export class ConsultationPageComponent implements AfterViewInit {
 
   constructor(public consultation: ConsultationService, public steps: StepsListService,
               public cards: CardsListService, private settings: SettingsService,
-              private preparation: PreparationService, private router: Router) { }
+              private preparation: PreparationService, private router: Router,
+              private m: ConsultationMenuService) { }
 }

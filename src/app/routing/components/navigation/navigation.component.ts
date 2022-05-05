@@ -1,6 +1,4 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {CardsListService} from "../../../shared/services/cards-list.service";
 
 @Component({
   selector: 'app-navigation',
@@ -9,12 +7,4 @@ import {CardsListService} from "../../../shared/services/cards-list.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent {
-  //
-  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-  //   .pipe(
-  //     map(result => result.matches),
-  //     shareReplay()
-  //   );
-
-  constructor(private breakpointObserver: BreakpointObserver, public cards: CardsListService) {}
 }

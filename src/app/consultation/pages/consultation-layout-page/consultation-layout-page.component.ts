@@ -5,6 +5,7 @@ import {SubscriptionLike, tap} from 'rxjs';
 import {StepsListService} from "../../services/steps-list.service";
 import {ConsultationService} from "../../services/consultation.service";
 import {PreparationService} from "../../services/preparation.service";
+import {ConsultationMenuService} from "../../services/consultation-menu.service";
 
 @Component({
   selector: 'app-consultation-layout-page',
@@ -19,6 +20,7 @@ export class ConsultationLayoutPageComponent implements OnInit, OnDestroy {
     this.dataSub.push(this.route.params.pipe(tap(({consultationSession}) => {
       this.consultation.init(consultationSession);
       this.preparation.init(consultationSession);
+      this.m.init();
     })).subscribe());
   }
   ngOnDestroy(): void {
@@ -27,6 +29,6 @@ export class ConsultationLayoutPageComponent implements OnInit, OnDestroy {
     fullUnsubscribe(this.dataSub);
   }
 
-  constructor(private steps: StepsListService, private route: ActivatedRoute,
+  constructor(private steps: StepsListService, private route: ActivatedRoute, private m: ConsultationMenuService,
               private consultation: ConsultationService, private preparation: PreparationService) { }
 }
