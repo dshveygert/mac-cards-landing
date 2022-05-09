@@ -9,5 +9,8 @@ export const environment = {
   terms: {
     administrator: 'John Doe',
     inn: '000123456789'
+  },
+  analytics: {
+    ga: ''
   }
 };

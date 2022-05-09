@@ -2,10 +2,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RoutingModule } from './routing/routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,7 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     RoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxGoogleAnalyticsModule.forRoot(environment.analytics.ga),
+    NgxGoogleAnalyticsRouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
