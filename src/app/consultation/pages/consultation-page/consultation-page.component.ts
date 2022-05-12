@@ -30,7 +30,7 @@ export class ConsultationPageComponent implements AfterViewInit {
   nextStep(step = 0): void {
     if (step === 3) {
       this.m.savePage('final');
-      this.router.navigate([`/consultation/100500/final`]).then();
+      this.router.navigate([`/consultation/${this.consultation.uuid}/final`]).then();
       return;
     }
     this.consultation.nextStepHandler(this.steps.nextStep(step));

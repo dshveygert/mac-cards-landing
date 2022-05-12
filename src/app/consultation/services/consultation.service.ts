@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {map, Observable, SubscriptionLike} from 'rxjs';
 import {CryptoData, localStorageGetItem, localStorageSetItem} from '../../../utils/localStorage';
 import {Collection} from "../../../utils/collection";
-import {ICard, ICardByStep, IConsultation, ELocalStorage, IStep} from "../../api/models";
+import {ICard, ICardByStep, IConsultation, ELocalStorage, IStep, IConsultationStorage} from "../../api/models";
 import {fullUnsubscribe} from "../../../utils";
 
 @Injectable({
@@ -10,11 +10,19 @@ import {fullUnsubscribe} from "../../../utils";
 })
 export class ConsultationService extends Collection<IConsultation> {
   private dataSub: SubscriptionLike[] = [];
-  private consultationSession: string;
   private crypto = new CryptoData(ELocalStorage.consultation);
 
   get currentStepId$(): Observable<number> {
     return this.data$.pipe(map(d => d?.currentStep?.id));
+  }
+
+  get uuid(): string {
+    return this.data?.uuid;
+  }
+
+  get consultations(): IConsultationStorage {
+    const data = localStorageGetItem(ELocalStorage.consultation, this.crypto);
+    return !!data ? JSON.parse(data) : null
   }
 
   isStepCompleted(step: IStep): boolean {
@@ -22,13 +30,20 @@ export class ConsultationService extends Collection<IConsultation> {
   }
 
   private dataEmit(step: IStep, log?: ICardByStep): void {
-    const consultation: IConsultation = {
-      uuid: this.consultationSession,
+    this.data = {
+      uuid: this.uuid,
       currentStep: step,
       log: log ? [...this.data?.log, log] : this.data?.log
     };
-    localStorageSetItem(ELocalStorage.consultation, JSON.stringify(consultation), this.crypto);
-    this.data = consultation;
+    this.saveToLocalStorage();
+  }
+
+  private saveToLocalStorage(): void {
+    let data = {[this.data.uuid]: this.data};
+    if (this.consultations) {
+      data = {...this.consultations, ...data};
+    }
+    localStorageSetItem(ELocalStorage.consultation, JSON.stringify(data), this.crypto);
   }
 
   nextStepHandler(nextStep: IStep): void {
@@ -40,10 +55,8 @@ export class ConsultationService extends Collection<IConsultation> {
   }
 
   init(consultationSession: string): void {
-    this.consultationSession = consultationSession;
-    const consultation = localStorageGetItem(ELocalStorage.consultation, this.crypto);
-    const localData = consultation ? JSON.parse(consultation) : {};
-    this.data = localData?.uuid === consultationSession ? localData : {
+    // @ts-ignore
+    this.data = this.consultations?.hasOwnProperty(consultationSession) ? this.consultations[consultationSession] : {
       uuid: consultationSession,
       currentStep: -1,
       log: []
@@ -52,6 +65,7 @@ export class ConsultationService extends Collection<IConsultation> {
 
   destroy(): void {
     fullUnsubscribe(this.dataSub);
+    this.data = {} as IConsultation;
   }
 
   constructor() {

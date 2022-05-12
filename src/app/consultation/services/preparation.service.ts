@@ -10,15 +10,15 @@ import {fullUnsubscribe} from "../../../utils";
 })
 export class PreparationService extends Collection<IPreparation[]> {
   private dataSub: SubscriptionLike[] = [];
-  private consultationSession: string;
+  private uuid: string;
   private crypto = new CryptoData(ELocalStorage.preparation);
 
   private dataEmit(answer: IPreparationAnswer): void {
     const preparation: IPreparation = {
-      uuid: this.consultationSession,
+      uuid: this.uuid,
       answer
     };
-    const index = this.data?.findIndex(item => item.uuid === this.consultationSession && item.answer?.form_code === answer.form_code);
+    const index = this.data?.findIndex(item => item.uuid === this.uuid && item.answer?.form_code === answer.form_code);
     if (index >= 0) {
       this.data[index] = preparation;
     } else {
@@ -28,7 +28,7 @@ export class PreparationService extends Collection<IPreparation[]> {
   }
 
   answerByFormCode$(code: string): Observable<IPreparationAnswer | undefined> {
-    return this.data$.pipe(map(d => d?.find(item => item.uuid === this.consultationSession && item.answer?.form_code === code)?.answer));
+    return this.data$.pipe(map(d => d?.find(item => item.uuid === this.uuid && item.answer?.form_code === code)?.answer));
   }
 
   saveAnswer(answer: IPreparationAnswer): void {
@@ -36,13 +36,14 @@ export class PreparationService extends Collection<IPreparation[]> {
   }
 
   init(consultationSession: string): void {
-    this.consultationSession = consultationSession;
+    this.uuid = consultationSession;
     const preparation = localStorageGetItem(ELocalStorage.preparation, this.crypto);
     this.data = preparation ? JSON.parse(preparation) : [];
   }
 
   destroy(): void {
     fullUnsubscribe(this.dataSub);
+    this.uuid = '';
   }
 
   constructor() {

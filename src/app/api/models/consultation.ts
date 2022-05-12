@@ -20,4 +20,13 @@ export interface IPreparationAnswer {
   value: string;
 }
 
-export type IConsultationMenu = 'final' | 'cards' | 'preparation';
+export type TConsultationMenu = 'final' | 'cards' | 'preparation';
+
+export interface IConsultationMenu {
+  uuid: string;
+  menu: TConsultationMenu[];
+}
+
+export interface IConsultationStorage {
+  [uuid: string]: IConsultation;
+}

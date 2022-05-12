@@ -20,12 +20,14 @@ export class ConsultationLayoutPageComponent implements OnInit, OnDestroy {
     this.dataSub.push(this.route.params.pipe(tap(({consultationSession}) => {
       this.consultation.init(consultationSession);
       this.preparation.init(consultationSession);
-      this.m.init();
+      this.m.init(consultationSession);
     })).subscribe());
   }
   ngOnDestroy(): void {
     this.steps.destroy();
     this.consultation.destroy();
+    this.preparation.destroy();
+    this.m.destroy();
     fullUnsubscribe(this.dataSub);
   }
 
