@@ -8,7 +8,7 @@ import { PaymentStatusPageComponent } from "./pages/payment-status-page/payment-
 const components = [PaymentLayoutPageComponent, PaymentPageComponent, PaymentStatusPageComponent];
 const routes: Routes = [
   {path: '', component: PaymentLayoutPageComponent, children: [
-      {path: '', component: PaymentPageComponent},
+      {path: '', component: PaymentPageComponent, pathMatch: 'full'},
       {path: ':paymentId', component: PaymentStatusPageComponent}
     ]},
   {path: '', redirectTo: '/', pathMatch: 'full'}

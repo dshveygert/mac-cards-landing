@@ -30,3 +30,19 @@ export interface IConsultationMenu {
 export interface IConsultationStorage {
   [uuid: string]: IConsultation;
 }
+
+export type TConsultationStatus = 'pending' | 'paid' | 'canceled' | 'expired';
+
+export interface IConsultationStatus {
+  id: string;
+  captured_at?: string;
+  created_at: string;
+  status: TConsultationStatus;
+  test: string;
+}
+
+export interface IConsultationResponse {
+  message: string;
+  status: IConsultationStatus;
+  uuid?: string;
+}

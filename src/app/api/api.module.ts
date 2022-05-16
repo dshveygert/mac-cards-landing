@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { PaymentApi } from './methods';
+import { ConsultationApi, PaymentApi } from './methods';
 
-const api = [PaymentApi];
+const api = [PaymentApi, ConsultationApi];
 
 @NgModule({
   imports: [HttpClientModule],

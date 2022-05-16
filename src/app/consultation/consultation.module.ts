@@ -11,17 +11,20 @@ import { FormMainQuestionComponent } from "./components/form/form-main-question/
 import { FinalPageComponent } from "./pages/final-page/final-page.component";
 import { ThanksPageComponent } from './pages/thanks-page/thanks-page.component';
 import { ConsultationNavigationMenuComponent } from "./components/consultation-navigation-menu/consultation-navigation-menu.component";
+import { ConsultationStatusService } from "./services/consultation-status.service";
+import { ExpiredPageComponent } from './pages/expired-page/expired-page.component';
 import { IsPaidGuard } from "../routing/guards/is-paid.guard";
 
 const components = [ConsultationLayoutPageComponent, ConsultationPageComponent, StepComponent, PreparationPageComponent,
-  FormMainQuestionComponent, FinalPageComponent, ThanksPageComponent, ConsultationNavigationMenuComponent];
+  FormMainQuestionComponent, FinalPageComponent, ThanksPageComponent, ConsultationNavigationMenuComponent, ExpiredPageComponent];
 const routes: Routes = [
   {path: ':consultationSession', component: ConsultationLayoutPageComponent, children: [
     // {path: '', redirectTo: 'cards', pathMatch: 'full'},
     {path: 'cards', component: ConsultationPageComponent},
     {path: 'preparation', component: PreparationPageComponent},
     {path: 'final', canActivate: [IsPaidGuard], component: FinalPageComponent},
-    {path: 'thanks', component: ThanksPageComponent}
+    {path: 'thanks', component: ThanksPageComponent},
+    {path: 'expired', component: ExpiredPageComponent}
   ]},
   {path: '', redirectTo: '/', pathMatch: 'full'},
 ];
@@ -29,6 +32,6 @@ const routes: Routes = [
 @NgModule({
   declarations: components,
   imports: [RouterModule.forChild(routes), SharedModule],
-  providers: [StepsListService, ConsultationMenuService]
+  providers: [StepsListService, ConsultationMenuService, ConsultationStatusService]
 })
 export class ConsultationModule { }

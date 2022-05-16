@@ -6,6 +6,7 @@ import {StepsListService} from "../../services/steps-list.service";
 import {ConsultationService} from "../../services/consultation.service";
 import {PreparationService} from "../../services/preparation.service";
 import {ConsultationMenuService} from "../../services/consultation-menu.service";
+import {ConsultationStatusService} from "../../services/consultation-status.service";
 
 @Component({
   selector: 'app-consultation-layout-page',
@@ -20,6 +21,7 @@ export class ConsultationLayoutPageComponent implements OnInit, OnDestroy {
     this.dataSub.push(this.route.params.pipe(tap(({consultationSession}) => {
       this.consultation.init(consultationSession);
       this.preparation.init(consultationSession);
+      this.status.init(consultationSession);
       this.m.init(consultationSession);
     })).subscribe());
   }
@@ -27,10 +29,12 @@ export class ConsultationLayoutPageComponent implements OnInit, OnDestroy {
     this.steps.destroy();
     this.consultation.destroy();
     this.preparation.destroy();
+    this.status.destroy();
     this.m.destroy();
     fullUnsubscribe(this.dataSub);
   }
 
   constructor(private steps: StepsListService, private route: ActivatedRoute, private m: ConsultationMenuService,
-              private consultation: ConsultationService, private preparation: PreparationService) { }
+              private consultation: ConsultationService, private preparation: PreparationService,
+              private status: ConsultationStatusService) { }
 }
