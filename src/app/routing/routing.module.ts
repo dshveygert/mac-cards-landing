@@ -11,6 +11,7 @@ const components = [LayoutComponent, NavigationComponent, HomePageComponent, Foo
 
 const routes: Routes = [
   {path: '', component: LayoutComponent, children: [
+      {path: 'payment', loadChildren: () => import(`../payment/payment.module`).then(m => m.PaymentModule)},
       {path: 'consultation', loadChildren: () => import(`../consultation/consultation.module`).then(m => m.ConsultationModule)},
       {path: 'docs', loadChildren: () => import(`../documents/documents.module`).then(m => m.DocumentsModule)},
       {path: '', component: HomePageComponent, pathMatch: 'full'},

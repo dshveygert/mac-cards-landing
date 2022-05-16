@@ -1,6 +1,8 @@
-import {ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import { environment } from "../../../../environments/environment";
+import { SubscriptionLike } from "rxjs";
+import { fullUnsubscribe } from "../../../../utils";
 
 @Component({
   selector: 'app-home-page',
@@ -8,17 +10,24 @@ import { environment } from "../../../../environments/environment";
   styleUrls: ['./home-page.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnDestroy {
+  private dataSub: SubscriptionLike[] = [];
+
   get price(): number {
     return environment.price.one_time;
   }
 
   start(): void {
-    this.router.navigate([`/consultation/100500/preparation`]).then();
+    this.getConsultation();
   }
 
   getConsultation(): void {
-    this.router.navigate([`/consultation/100500/preparation`]).then();
+    this.router.navigate([`/payment`]).then();
+  }
+
+
+  ngOnDestroy(): void {
+    fullUnsubscribe(this.dataSub);
   }
 
   constructor(private router: Router) { }

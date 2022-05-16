@@ -42,7 +42,8 @@ export const enum ELocalStorage {
   consultation = 'consultation',
   preparation = 'preparation',
   settings = 'settings',
-  consultation_menu = 'cmenu'
+  consultation_menu = 'cmenu',
+  payment_key = 'key'
 }
 
 export interface IDocConfig {

@@ -11,6 +11,7 @@ import { FormMainQuestionComponent } from "./components/form/form-main-question/
 import { FinalPageComponent } from "./pages/final-page/final-page.component";
 import { ThanksPageComponent } from './pages/thanks-page/thanks-page.component';
 import { ConsultationNavigationMenuComponent } from "./components/consultation-navigation-menu/consultation-navigation-menu.component";
+import { IsPaidGuard } from "../routing/guards/is-paid.guard";
 
 const components = [ConsultationLayoutPageComponent, ConsultationPageComponent, StepComponent, PreparationPageComponent,
   FormMainQuestionComponent, FinalPageComponent, ThanksPageComponent, ConsultationNavigationMenuComponent];
@@ -19,7 +20,7 @@ const routes: Routes = [
     // {path: '', redirectTo: 'cards', pathMatch: 'full'},
     {path: 'cards', component: ConsultationPageComponent},
     {path: 'preparation', component: PreparationPageComponent},
-    {path: 'final', component: FinalPageComponent},
+    {path: 'final', canActivate: [IsPaidGuard], component: FinalPageComponent},
     {path: 'thanks', component: ThanksPageComponent}
   ]},
   {path: '', redirectTo: '/', pathMatch: 'full'},

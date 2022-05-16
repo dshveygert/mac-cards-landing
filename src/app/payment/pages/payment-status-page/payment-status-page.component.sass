@@ -1,0 +1,10 @@
+@import "src/styles/helpers"
+
+.title
+  span
+    animation: blink-animation 2s steps(10, start) infinite
+    -webkit-animation: blink-animation 2s steps(10, start) infinite
+
+@keyframes blink-animation
+  to
+    opacity: 0
