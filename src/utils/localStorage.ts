@@ -39,8 +39,8 @@ export class CryptoData {
   }
 
   private generateKey(salt: string): string {
-    const {language, appName, appVersion, productSub} = window.navigator ?? {};
-    const key = [this._timestamp, language, appName, appVersion, productSub, salt].join('');
+    const {language, appName} = window.navigator ?? {};
+    const key = [language, appName, salt].join('');
     return SHA256(key).toString();
   }
 

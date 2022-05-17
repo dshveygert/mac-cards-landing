@@ -45,6 +45,7 @@ export class FormMainQuestionComponent implements OnInit, OnDestroy {
     formGroupTrim(this.formGroup);
     formGroupValidate(this.formGroup);
     if (this.formGroup.valid) {
+      this.preparation.saveAnswer(this.answerPreparation);
       this.formSubmit.emit(this.answerPreparation);
     }
   }
