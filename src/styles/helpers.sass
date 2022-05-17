@@ -14,3 +14,9 @@
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
+
+$smartphoneWidth: 640px
+
+@mixin forSmartphone
+  @media only screen and (max-width: $smartphoneWidth)
+    @content

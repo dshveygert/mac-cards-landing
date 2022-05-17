@@ -19,9 +19,9 @@ const components = [ConsultationLayoutPageComponent, ConsultationPageComponent, 
   FormMainQuestionComponent, FinalPageComponent, ThanksPageComponent, ConsultationNavigationMenuComponent, ExpiredPageComponent];
 const routes: Routes = [
   {path: ':consultationSession', component: ConsultationLayoutPageComponent, children: [
-    // {path: '', redirectTo: 'cards', pathMatch: 'full'},
-    {path: 'cards', component: ConsultationPageComponent},
+    {path: '', redirectTo: 'preparation', pathMatch: 'full'},
     {path: 'preparation', component: PreparationPageComponent},
+    {path: 'cards', component: ConsultationPageComponent},
     {path: 'final', canActivate: [IsPaidGuard], component: FinalPageComponent},
     {path: 'thanks', component: ThanksPageComponent},
     {path: 'expired', component: ExpiredPageComponent}

@@ -11,9 +11,13 @@ body
 h1
   @include fsz(4em, 1.125)
   font-weight: 800
+  @include forSmartphone
+    @include fsz(3em, 1.125)
 h2
   @include fsz(2.5em, 1.125)
   font-weight: 700
+  @include forSmartphone
+    margin-block-start: 0
 h3
   @include fsz(0.875em, 1.5)
   font-weight: 700
@@ -22,6 +26,8 @@ p
   color: rgba(255,255,255,0.71)
   @include fsz(1em, 1.875)
   font-weight: 300
+  @include forSmartphone
+    @include fsz(1em, 1.5)
 
 .full-screen-modal
   padding-top: 1rem
@@ -45,8 +51,12 @@ p
   justify-content: center
 .content-wrapper
   padding: 4rem 4rem 0
+  @include forSmartphone
+    padding: 2rem 2rem 0
 .content-block
   padding: 3rem 0
+  @include forSmartphone
+    padding: 1rem 0
   &--white
     background: transparent
 mark
@@ -98,3 +108,8 @@ mark
         flex-grow: 1
         flex-shrink: 1
         margin: 0
+
+.mat-form-field-appearance-fill
+  .mat-form-field-infix
+    @include forSmartphone
+      padding-top: 1em
