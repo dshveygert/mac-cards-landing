@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {filter, Observable, SubscriptionLike, tap} from 'rxjs';
+import {catchError, filter, Observable, of, SubscriptionLike, tap} from 'rxjs';
 import {fullUnsubscribe} from '../../../utils';
 import {Collection} from "../../../utils/collection";
 import {SettingsService} from "../../routing/services/settings.service";
@@ -26,6 +26,11 @@ export class ConsultationStatusService extends Collection<IConsultationStatus> {
           this.router.navigate([`/payment/${consultationSession}`]).then();
         }
       }
+    }), catchError(err => {
+      if (err?.error?.status.status === 'not_found') {
+        this.router.navigate([`/payment`]).then();
+      }
+      return of();
     })).subscribe());
   }
 

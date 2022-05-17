@@ -31,7 +31,7 @@ export interface IConsultationStorage {
   [uuid: string]: IConsultation;
 }
 
-export type TConsultationStatus = 'pending' | 'paid' | 'canceled' | 'expired';
+export type TConsultationStatus = 'pending' | 'paid' | 'canceled' | 'expired' | 'not_found' | 'error';
 
 export interface IConsultationStatus {
   id: string;
