@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {SettingsService} from "../../../routing/services/settings.service";
 import {ConsultationMenuService} from "../../services/consultation-menu.service";
 import {ConsultationService} from "../../services/consultation.service";
+import {PreparationService} from "../../services/preparation.service";
 
 @Component({
   selector: 'app-preparation-page',
@@ -15,6 +16,7 @@ export class PreparationPageComponent implements AfterViewInit {
   goToSteps(data: any): void {
     this.m.savePage('cards');
     this.router.navigate([`/consultation/${this.consultation.uuid}/cards`]).then();
+    this.preparation.saveMainAnswerInDB();
   }
 
   ngAfterViewInit(): void {
@@ -22,5 +24,5 @@ export class PreparationPageComponent implements AfterViewInit {
   }
 
   constructor(private settings: SettingsService, private router: Router, private consultation: ConsultationService,
-              private m: ConsultationMenuService) { }
+              private m: ConsultationMenuService, private preparation: PreparationService) { }
 }

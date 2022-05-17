@@ -1,7 +1,7 @@
-export interface IPaymentResponse {
-  message: string;
+import {IDefaultResponse} from "./content";
+
+export interface IPaymentResponse extends IDefaultResponse {
   payment: IPayment;
-  uuid?: string;
 }
 
 export interface IPayment {

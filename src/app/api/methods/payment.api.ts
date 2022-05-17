@@ -11,6 +11,7 @@ export class PaymentApi {
   public paymentCreate(key: string): Observable<IPaymentResponse> {
     return this.http.post<IPaymentResponse>(`${this.api}/payment/create`, {key});
   }
+
   public paymentStatus(paymentId: string): Observable<IPaymentResponse> {
     return this.http.get<IPaymentResponse>(`${this.api}/payment/${paymentId}`);
   }

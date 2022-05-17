@@ -17,6 +17,7 @@ export class FinalPageComponent implements AfterViewInit {
 
   nextStep(): void {
     this.router.navigate([`/consultation/${this.consultation.uuid}/thanks`]).then();
+    this.preparation.saveAnswerInDB('final');
   }
 
   ngAfterViewInit(): void {

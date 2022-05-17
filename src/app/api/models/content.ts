@@ -52,3 +52,10 @@ export interface IDocConfig {
   inn: string;
   email: string;
 }
+
+export interface IDefaultResponse {
+  message: string;
+  uuid?: string;
+}
+
+export type TAnswerType = 'preparation' | 'consultation' | 'main-question' | 'final';

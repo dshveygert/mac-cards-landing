@@ -1,4 +1,4 @@
-import {ICard, IStep} from "./content";
+import {ICard, IDefaultResponse, IStep} from "./content";
 
 export interface ICardByStep {
   step: IStep;
@@ -41,8 +41,6 @@ export interface IConsultationStatus {
   test: string;
 }
 
-export interface IConsultationResponse {
-  message: string;
+export interface IConsultationResponse extends IDefaultResponse {
   status: IConsultationStatus;
-  uuid?: string;
 }

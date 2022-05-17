@@ -40,7 +40,7 @@ export class PaymentService extends Collection<IPayment> {
   public checkPaymentStatus = (paymentId: string): Observable<IPaymentResponse> => {
     return this.api.paymentStatus(paymentId).pipe(tap(d => {
       this.data = d.payment ?? {};
-      if (this.data.status === 'succeeded') {
+      if (this.data?.status === 'succeeded') {
         const paymentKey: IPaymentLocalData = {
           key: JSON.parse(localStorageGetItem(ELocalStorage.payment_key, this.crypto) ?? '')?.key === this.key ? this.key : '', // if payment is checking directly from url (not after payment creation)
           paymentId: this.data.id,

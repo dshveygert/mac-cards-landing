@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {map, Observable, SubscriptionLike} from 'rxjs';
+import {map, Observable, SubscriptionLike, take} from 'rxjs';
 import {CryptoData, localStorageGetItem, localStorageSetItem} from '../../../utils/localStorage';
 import {Collection} from "../../../utils/collection";
-import {IPreparation, ELocalStorage, IPreparationAnswer} from "../../api/models";
+import {IPreparation, ELocalStorage, IPreparationAnswer, TAnswerType} from "../../api/models";
 import {fullUnsubscribe} from "../../../utils";
+import {SaveAnswersService} from "../../shared/services/save-answers.service";
 
 @Injectable({
   providedIn: 'root'
@@ -27,26 +28,43 @@ export class PreparationService extends Collection<IPreparation[]> {
     localStorageSetItem(ELocalStorage.preparation, JSON.stringify(this.data), this.crypto);
   }
 
-  answerByFormCode$(code: string): Observable<IPreparationAnswer | undefined> {
+  public answerByFormCode$(code: string): Observable<IPreparationAnswer | undefined> {
     return this.data$.pipe(map(d => d?.find(item => item.uuid === this.uuid && item.answer?.form_code === code)?.answer));
   }
 
-  saveAnswer(answer: IPreparationAnswer): void {
+  public saveAnswer(answer: IPreparationAnswer): void {
     return this.dataEmit(answer);
   }
 
-  init(consultationSession: string): void {
+  public saveAnswerInDB(type: TAnswerType): void {
+    const key = localStorageGetItem(ELocalStorage.payment_key, this.crypto);
+    const preparation = localStorageGetItem(ELocalStorage.preparation, this.crypto);
+    if (!!preparation) {
+      this.dataSub.push(this.db.saveData(this.uuid, JSON.parse(preparation)?.filter((d: IPreparation) => d.uuid === this.uuid), type, !!key && JSON.parse(key)?.key).pipe(take(1)).subscribe());
+    }
+  }
+
+  public saveMainAnswerInDB(): void {
+    const key = localStorageGetItem(ELocalStorage.payment_key, this.crypto);
+    const preparation = localStorageGetItem(ELocalStorage.preparation, this.crypto);
+    if (!!preparation) {
+      const answer = JSON.parse(preparation)?.filter((d: IPreparation) => d.uuid === this.uuid && d.answer.form_code === 'final-question-form');
+      this.dataSub.push(this.db.saveData(this.uuid, answer, 'main-question', !!key && JSON.parse(key)?.key).pipe(take(1)).subscribe());
+    }
+  }
+
+  public init(consultationSession: string): void {
     this.uuid = consultationSession;
     const preparation = localStorageGetItem(ELocalStorage.preparation, this.crypto);
     this.data = preparation ? JSON.parse(preparation) : [];
   }
 
-  destroy(): void {
+  public destroy(): void {
     fullUnsubscribe(this.dataSub);
     this.uuid = '';
   }
 
-  constructor() {
+  constructor(private db: SaveAnswersService) {
     super();
   }
 }
