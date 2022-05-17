@@ -10,8 +10,6 @@ export class SaveAnswersService {
     const answers = !!data && data.reduce((a: any, d: IPreparation) => {
       return [...a, {form: d.answer.form_code, value: d.answer.value}];
     }, []);
-    console.log('paymentId', paymentId);
-    console.log('answers', answers);
     return this.api.saveAnswers(paymentId, {answers, uuid, type, paymentId});
   }
 

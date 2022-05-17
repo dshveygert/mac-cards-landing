@@ -8,6 +8,7 @@ export interface IConsultation {
   uuid: string;
   currentStep: IStep;
   log: ICardByStep[];
+  time: number;
 }
 
 export interface IPreparation {

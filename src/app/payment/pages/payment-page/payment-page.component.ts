@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component} from '@angular/core';
 import {PaymentService} from "../../services/payment.service";
 
 @Component({
@@ -6,19 +6,11 @@ import {PaymentService} from "../../services/payment.service";
   templateUrl: './payment-page.component.html',
   styleUrls: ['./payment-page.component.sass']
 })
-export class PaymentPageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PaymentPageComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    this.payment.init();
-  }
-
-  ngOnInit(): void {
-  }
-
-
-
-  ngOnDestroy(): void {
+    setTimeout(() => this.payment.init(), 3000);
   }
 
   constructor(private payment: PaymentService) { }

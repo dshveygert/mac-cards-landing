@@ -24,7 +24,7 @@ export class ConsultationPageComponent implements AfterViewInit {
   }
 
   get workTheme$(): Observable<string> {
-    return this.preparation.answerByFormCode$('final-question-form').pipe(map(t => !!t && t.value?.length > 0 ? `< ${t.value} >` : 'К сожалению, Вы не записали тему для проработки :(('));
+    return this.preparation.answerByFormCode$('final-question-form').pipe(map(t => !!t && t.value?.length > 0 ? `"${t.value}"` : 'К сожалению, Вы не записали тему для проработки :(('));
   }
 
   nextStep(step = 0): void {

@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 import { SubscriptionLike } from "rxjs";
 import { fullUnsubscribe } from "../../../../utils";
+import { ConsultationService } from "../../../consultation/services/consultation.service";
 
 @Component({
   selector: 'app-home-page',
@@ -17,11 +18,19 @@ export class HomePageComponent implements OnDestroy {
     return environment.price.one_time;
   }
 
-  start(): void {
-    this.getConsultation();
+  get startButton(): string {
+    return !!this.consultation.consultations ? 'Перейти к консультации' : 'Начать';
   }
 
-  getConsultation(): void {
+  public start(): void {
+    if (!!this.consultation.consultations && !!this.consultation.lastConsultation?.uuid) {
+      this.router.navigate([`/consultation/${this.consultation.lastConsultation?.uuid}/preparation`]).then();
+    } else {
+      this.getConsultation();
+    }
+  }
+
+  public getConsultation(): void {
     this.router.navigate([`/payment`]).then();
   }
 
@@ -30,5 +39,5 @@ export class HomePageComponent implements OnDestroy {
     fullUnsubscribe(this.dataSub);
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private consultation: ConsultationService) { }
 }

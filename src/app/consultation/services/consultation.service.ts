@@ -25,6 +25,11 @@ export class ConsultationService extends Collection<IConsultation> {
     return !!data ? JSON.parse(data) : null
   }
 
+  get lastConsultation(): IConsultation {
+    const cs = !!this.consultations && Object.keys(this.consultations).map(key => this.consultations[key]).sort((a, b) => a.time - b.time)
+    return cs[cs.length - 1];
+  }
+
   isStepCompleted(step: IStep): boolean {
     return this.data?.currentStep?.id >= step.id;
   }
@@ -33,7 +38,8 @@ export class ConsultationService extends Collection<IConsultation> {
     this.data = {
       uuid: this.uuid,
       currentStep: step,
-      log: log ? [...this.data?.log, log] : this.data?.log
+      log: log ? [...this.data?.log, log] : this.data?.log,
+      time: new Date().getTime()
     };
     this.saveToLocalStorage();
   }
