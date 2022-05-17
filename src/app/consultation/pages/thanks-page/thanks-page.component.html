@@ -63,12 +63,12 @@
     <div class="links">
       <div class="button-wrapper">
         <a [href]="config.telegram" target="_blank" class="telegram">
-          <button mat-button class="cards-button upper">Связаться в Telegram</button>
+          <button mat-button class="cards-button upper" (click)="gaClick('telegram')">Связаться в Telegram</button>
         </a>
       </div>
       <div class="button-wrapper">
         <a [href]="config.whatsapp" target="_blank" class="whatsapp">
-          <button mat-button class="cards-button upper">Связаться в Whatsapp</button>
+          <button mat-button class="cards-button upper" (click)="gaClick('whatsapp')">Связаться в Whatsapp</button>
         </a>
       </div>
     </div>

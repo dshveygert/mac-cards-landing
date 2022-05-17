@@ -8,6 +8,7 @@ import {SettingsService} from "../../../routing/services/settings.service";
 import {PreparationService} from "../../services/preparation.service";
 import {Router} from "@angular/router";
 import {ConsultationMenuService} from "../../services/consultation-menu.service";
+import {GoogleAnalyticsService} from "ngx-google-analytics";
 
 @Component({
   selector: 'app-consultation-page',
@@ -16,8 +17,9 @@ import {ConsultationMenuService} from "../../services/consultation-menu.service"
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConsultationPageComponent implements AfterViewInit {
-  currentStepId: IStep;
-  step: IStep;
+  private gaCategory = 'consultation_page';
+  public currentStepId: IStep;
+  public step: IStep;
 
   get currentStep$(): Observable<IStep> {
     return combineLatest([this.steps.data$, this.consultation.currentStepId$]).pipe(map(([steps, current]) => steps?.find(d => d.id === current) ?? {} as IStep));
@@ -30,10 +32,12 @@ export class ConsultationPageComponent implements AfterViewInit {
   nextStep(step = 0): void {
     if (step === 3) {
       this.m.savePage('final');
+      this.ga.event('complete_consultation_cards', this.gaCategory, this.consultation.uuid);
       this.router.navigate([`/consultation/${this.consultation.uuid}/final`]).then();
       this.preparation.saveAnswerInDB('consultation');
       return;
     }
+    this.ga.event('next_consultation_cards', this.gaCategory, this.consultation.uuid, step);
     this.consultation.nextStepHandler(this.steps.nextStep(step));
   }
 
@@ -58,7 +62,7 @@ export class ConsultationPageComponent implements AfterViewInit {
   }
 
   constructor(public consultation: ConsultationService, public steps: StepsListService,
-              public cards: CardsListService, private settings: SettingsService,
+              public cards: CardsListService, private settings: SettingsService, private ga: GoogleAnalyticsService,
               private preparation: PreparationService, private router: Router,
               private m: ConsultationMenuService) { }
 }

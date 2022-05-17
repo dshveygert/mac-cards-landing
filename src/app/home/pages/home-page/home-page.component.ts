@@ -4,6 +4,7 @@ import { environment } from "../../../../environments/environment";
 import { SubscriptionLike } from "rxjs";
 import { fullUnsubscribe } from "../../../../utils";
 import { ConsultationService } from "../../../consultation/services/consultation.service";
+import { GoogleAnalyticsService } from "ngx-google-analytics";
 
 @Component({
   selector: 'app-home-page',
@@ -13,6 +14,7 @@ import { ConsultationService } from "../../../consultation/services/consultation
 })
 export class HomePageComponent implements OnDestroy {
   private dataSub: SubscriptionLike[] = [];
+  private gaCategory = 'home_page';
 
   get price(): number {
     return environment.price.one_time;
@@ -24,13 +26,16 @@ export class HomePageComponent implements OnDestroy {
 
   public start(): void {
     if (!!this.consultation.consultations && !!this.consultation.lastConsultation?.uuid) {
+      this.ga.event('get_consultation_again', this.gaCategory, this.consultation.lastConsultation?.uuid);
       this.router.navigate([`/consultation/${this.consultation.lastConsultation?.uuid}/preparation`]).then();
     } else {
-      this.getConsultation();
+      this.ga.event('get_consultation', this.gaCategory, 'start');
+      this.router.navigate([`/payment`]).then();
     }
   }
 
   public getConsultation(): void {
+    this.ga.event('get_consultation', this.gaCategory, 'get_consultation_button');
     this.router.navigate([`/payment`]).then();
   }
 
@@ -39,5 +44,5 @@ export class HomePageComponent implements OnDestroy {
     fullUnsubscribe(this.dataSub);
   }
 
-  constructor(private router: Router, private consultation: ConsultationService) { }
+  constructor(private router: Router, private consultation: ConsultationService, private ga: GoogleAnalyticsService) { }
 }
