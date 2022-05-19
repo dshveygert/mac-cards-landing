@@ -37,22 +37,6 @@ export class PaymentStatusPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.dataSub.push(this.route.params.pipe(switchMap(({paymentId}) => {
-    //   this.counter = 1;
-    //   return interval(environment.api.payment_status_pending).pipe(switchMap(() => {
-    //     if (this._counter > environment.api.payment_status_attempts || (!!this.payment.data && this.payment.data.status !== 'pending')) {
-    //       fullUnsubscribe(this.dataSub);
-    //       return of({});
-    //     } else {
-    //       this.counter = this._counter + 1;
-    //       return this.payment.checkPaymentStatus(paymentId);
-    //     }
-    //   }));
-    // })).subscribe());
-    // this.dataSub.push(this.route.params.pipe(switchMap(({paymentId}) => {
-    //   return this.payment.checkPaymentStatus(paymentId);
-    // }), take(1)).subscribe());
-
     this.dataSub.push(this.route.params.pipe(switchMap(({paymentId}) => {
       this._paymentID = paymentId;
       return this.payment.checkPaymentStatus(paymentId);

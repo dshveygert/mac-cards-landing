@@ -5,7 +5,12 @@ import {fullUnsubscribe, generateMagicPayment} from '../../../utils';
 import {Collection} from "../../../utils/collection";
 import {SettingsService} from "../../routing/services/settings.service";
 import {PaymentApi} from "../../api/methods";
-import {CryptoData, localStorageGetItem, localStorageSetItem} from "../../../utils/localStorage";
+import {
+  CryptoData,
+  localStorageGetItem,
+  localStorageRemoveItem,
+  localStorageSetItem
+} from "../../../utils/localStorage";
 import {ELocalStorage, IPayment, IPaymentLocalData, IPaymentResponse} from "../../api/models";
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
@@ -32,6 +37,11 @@ export class PaymentService extends Collection<IPayment> {
     }
   }
 
+  get pendingPayment(): IPaymentLocalData {
+    const localKey = JSON.parse(localStorageGetItem(ELocalStorage.payment_key, this.crypto) ?? '');
+    return !!localKey && localKey.key && localKey;
+  }
+
   private paymentEmit(data: IPaymentResponse): void {
     this.data = data.payment ?? {};
     if (this.data?.status === 'succeeded') {
@@ -43,6 +53,10 @@ export class PaymentService extends Collection<IPayment> {
       localStorageSetItem(ELocalStorage.payment_key, JSON.stringify(paymentKey), this.crypto);
       this.router.navigate([`/consultation/${this.data.id}/preparation`]).then();
     }
+  }
+
+  public clearPendingPayment(): void {
+    localStorageRemoveItem(ELocalStorage.payment_key);
   }
 
   public createPayment = (): Observable<IPaymentResponse> =>  {

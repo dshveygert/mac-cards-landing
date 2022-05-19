@@ -10,7 +10,7 @@ export class PaymentPageComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.payment.init(), 3000);
+    setTimeout(() => this.payment.init(), 2000);
   }
 
   constructor(private payment: PaymentService) { }
