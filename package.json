@@ -1,10 +1,10 @@
 {
   "name": "mac-cards-landing",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --aot --output-hashing=all",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
