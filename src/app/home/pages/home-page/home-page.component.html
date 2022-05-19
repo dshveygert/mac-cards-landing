@@ -49,9 +49,20 @@
     <p>Доступ к консультации и ее результатам будет открыт 3 дня, в течение которых Вы сможете проработать свой запрос.</p>
   </div>
 
-  <div class="button-wrapper">
-    <button mat-button class="cards-button upper" (click)="getConsultation()">Получить консультацию</button>
-  </div>
+  <ng-container *ngIf="this.hasLastConsultation; else newConsultation">
+    <div class="button-wrapper new">
+      <button mat-button class="cards-button upper" (click)="goToExistingConsultation()">Перейти к консультации</button>
+      <p>
+        <span (click)="getConsultation()">...или начать новую</span>
+      </p>
+    </div>
+  </ng-container>
+  <ng-template #newConsultation>
+    <div class="button-wrapper">
+      <button mat-button class="cards-button upper" (click)="getConsultation()">Получить консультацию</button>
+    </div>
+  </ng-template>
+
 </div>
 
 <div class="content-block--white">

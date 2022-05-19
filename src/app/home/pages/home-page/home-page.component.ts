@@ -20,14 +20,22 @@ export class HomePageComponent implements OnDestroy {
     return environment.price.one_time;
   }
 
+  get hasLastConsultation(): boolean {
+    return !!this.consultation.consultations && !!this.consultation.lastConsultation?.uuid;
+  }
+
   get startButton(): string {
     return !!this.consultation.consultations ? 'Перейти к консультации' : 'Начать';
   }
 
+  public goToExistingConsultation(): void {
+    this.ga.event('get_consultation_again', this.gaCategory, this.consultation.lastConsultation?.uuid);
+    this.router.navigate([`/consultation/${this.consultation.lastConsultation?.uuid}/preparation`]).then();
+  }
+
   public start(): void {
-    if (!!this.consultation.consultations && !!this.consultation.lastConsultation?.uuid) {
-      this.ga.event('get_consultation_again', this.gaCategory, this.consultation.lastConsultation?.uuid);
-      this.router.navigate([`/consultation/${this.consultation.lastConsultation?.uuid}/preparation`]).then();
+    if (this.hasLastConsultation) {
+      this.goToExistingConsultation();
     } else {
       this.ga.event('get_consultation', this.gaCategory, 'start');
       this.router.navigate([`/payment`]).then();
