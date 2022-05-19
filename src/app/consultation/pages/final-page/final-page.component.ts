@@ -25,7 +25,7 @@ export class FinalPageComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.settings.scrollTop(0);
+    this.settings.scrollTop(1);
   }
 
   constructor(private preparation: PreparationService, private router: Router, private consultation: ConsultationService,

@@ -39,7 +39,7 @@ export interface IConsultationStatus {
   captured_at?: string;
   created_at: string;
   status: TConsultationStatus;
-  test: string;
+  test: boolean;
 }
 
 export interface IConsultationResponse extends IDefaultResponse {

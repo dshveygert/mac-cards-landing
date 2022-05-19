@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {catchError, filter, Observable, of, SubscriptionLike, tap} from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-import {fullUnsubscribe} from '../../../utils';
+import {fullUnsubscribe, generateMagicPayment} from '../../../utils';
 import {Collection} from "../../../utils/collection";
 import {SettingsService} from "../../routing/services/settings.service";
 import {PaymentApi} from "../../api/methods";
@@ -32,23 +32,33 @@ export class PaymentService extends Collection<IPayment> {
     }
   }
 
+  private paymentEmit(data: IPaymentResponse): void {
+    this.data = data.payment ?? {};
+    if (this.data?.status === 'succeeded') {
+      const paymentKey: IPaymentLocalData = {
+        key: JSON.parse(localStorageGetItem(ELocalStorage.payment_key, this.crypto) ?? '')?.key === this.key ? this.key : '', // if payment is checking directly from url (not after payment creation)
+        paymentId: this.data.id,
+        status: this.data?.status
+      };
+      localStorageSetItem(ELocalStorage.payment_key, JSON.stringify(paymentKey), this.crypto);
+      this.router.navigate([`/consultation/${this.data.id}/preparation`]).then();
+    }
+  }
+
   public createPayment = (): Observable<IPaymentResponse> =>  {
     this.key = this.createUUID;
     return this.api.paymentCreate(this.key);
   }
 
   public checkPaymentStatus = (paymentId: string): Observable<IPaymentResponse> => {
+    if (paymentId === environment.magic_uuid) {
+      console.log('MAGIC! Payment');
+      const payment = generateMagicPayment(paymentId, 'succeeded');
+      this.paymentEmit(payment);
+      return of(payment);
+    }
     return this.api.paymentStatus(paymentId).pipe(tap(d => {
-      this.data = d.payment ?? {};
-      if (this.data?.status === 'succeeded') {
-        const paymentKey: IPaymentLocalData = {
-          key: JSON.parse(localStorageGetItem(ELocalStorage.payment_key, this.crypto) ?? '')?.key === this.key ? this.key : '', // if payment is checking directly from url (not after payment creation)
-          paymentId: this.data.id,
-          status: this.data?.status
-        };
-        localStorageSetItem(ELocalStorage.payment_key, JSON.stringify(paymentKey), this.crypto);
-        this.router.navigate([`/consultation/${this.data.id}/preparation`]).then();
-      }
+      this.paymentEmit(d);
     }), catchError(e => {
       console.log('error', e.status, e.message, e.url);
       return of({} as IPaymentResponse);

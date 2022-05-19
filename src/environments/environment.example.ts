@@ -22,5 +22,6 @@ export const environment = {
     payment_create_period: 60000,
     payment_status_pending: 5000,
     payment_status_attempts: 10
-  }
+  },
+  magic_uuid: 'some-string-allows-see-consultation-without-payment'
 };

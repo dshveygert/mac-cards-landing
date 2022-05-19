@@ -13,8 +13,8 @@
       </div>
 
       <div class="divider"></div>
-      <div class="card">
-        <p *ngIf="!!step.sub_question">{{step.sub_question}}</p>
+      <div class="card sub_question">
+        <p *ngIf="!!step.sub_question" [innerHTML]="step.sub_question"></p>
         <app-form-main-question [formCode]="step.form_code"></app-form-main-question>
       </div>
       <div class="divider"></div>
