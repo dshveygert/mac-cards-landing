@@ -12,15 +12,15 @@ import {PaymentService} from "../../payment/services/payment.service";
 })
 export class PreparationService extends Collection<IPreparation[]> {
   private dataSub: SubscriptionLike[] = [];
-  private uuid: string;
+  private _paymentId: string;
   private crypto = new CryptoData(ELocalStorage.preparation);
 
   private dataEmit(answer: IPreparationAnswer): void {
     const preparation: IPreparation = {
-      uuid: this.uuid,
+      uuid: this._paymentId,
       answer
     };
-    const index = this.data?.findIndex(item => item.uuid === this.uuid && item.answer?.form_code === answer.form_code);
+    const index = this.data?.findIndex(item => item.uuid === this._paymentId && item.answer?.form_code === answer.form_code);
     if (index >= 0) {
       this.data[index] = preparation;
     } else {
@@ -30,7 +30,7 @@ export class PreparationService extends Collection<IPreparation[]> {
   }
 
   public answerByFormCode$(code: string): Observable<IPreparationAnswer | undefined> {
-    return this.data$.pipe(map(d => d?.find(item => item.uuid === this.uuid && item.answer?.form_code === code)?.answer));
+    return this.data$.pipe(map(d => d?.find(item => item.uuid === this._paymentId && item.answer?.form_code === code)?.answer));
   }
 
   public saveAnswer(answer: IPreparationAnswer): void {
@@ -41,7 +41,7 @@ export class PreparationService extends Collection<IPreparation[]> {
     const key = localStorageGetItem(ELocalStorage.payment_key, this.payment.crypto);
     const preparation = localStorageGetItem(ELocalStorage.preparation, this.crypto);
     if (!!preparation) {
-      this.dataSub.push(this.db.saveData(this.uuid, JSON.parse(preparation)?.filter((d: IPreparation) => d.uuid === this.uuid), type, !!key && JSON.parse(key)?.key).pipe(take(1)).subscribe());
+      this.dataSub.push(this.db.saveData(this._paymentId, JSON.parse(preparation)?.filter((d: IPreparation) => d.uuid === this._paymentId), type, !!key && JSON.parse(key)?.key).pipe(take(1)).subscribe());
     }
   }
 
@@ -49,20 +49,20 @@ export class PreparationService extends Collection<IPreparation[]> {
     const key = localStorageGetItem(ELocalStorage.payment_key, this.payment.crypto);
     const preparation = localStorageGetItem(ELocalStorage.preparation, this.crypto);
     if (!!preparation) {
-      const answer = JSON.parse(preparation)?.filter((d: IPreparation) => d.uuid === this.uuid && d.answer.form_code === 'final-question-form');
-      this.dataSub.push(this.db.saveData(this.uuid, answer, 'main-question', !!key && JSON.parse(key)?.key).pipe(take(1)).subscribe());
+      const answer = JSON.parse(preparation)?.filter((d: IPreparation) => d.uuid === this._paymentId && d.answer.form_code === 'final-question-form');
+      this.dataSub.push(this.db.saveData(this._paymentId, answer, 'main-question', !!key && JSON.parse(key)?.key).pipe(take(1)).subscribe());
     }
   }
 
-  public init(consultationSession: string): void {
-    this.uuid = consultationSession;
+  public init(paymentId: string): void {
+    this._paymentId = paymentId;
     const preparation = localStorageGetItem(ELocalStorage.preparation, this.crypto);
     this.data = !!preparation ? JSON.parse(preparation) : [];
   }
 
   public destroy(): void {
     fullUnsubscribe(this.dataSub);
-    this.uuid = '';
+    this._paymentId = '';
   }
 
   constructor(private db: SaveAnswersService, private payment: PaymentService) {

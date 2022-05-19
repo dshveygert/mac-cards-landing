@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {catchError, filter, Observable, of, SubscriptionLike, tap} from 'rxjs';
-import {fullUnsubscribe, generateMagicConsultationStatus, generateMagicPayment} from '../../../utils';
+import {fullUnsubscribe, generateMagicConsultationStatus} from '../../../utils';
 import {Collection} from "../../../utils/collection";
 import {SettingsService} from "../../routing/services/settings.service";
 import {ConsultationApi} from "../../api/methods";
@@ -11,16 +11,16 @@ import {environment} from "../../../environments/environment";
 @Injectable()
 export class ConsultationStatusService extends Collection<IConsultationStatus> {
   private dataSub: SubscriptionLike[] = [];
-  private _consultationSession: string;
+  private _paymentId: string;
 
   private statusEmit(data: IConsultationResponse): void {
     if (data.message === 'success') {
       this.data = data.status;
       if (this.data.status === 'expired') {
-        this.router.navigate([`/consultation/${this._consultationSession}/expired`]).then();
+        this.router.navigate([`/consultation/${this._paymentId}/expired`]).then();
       }
       if (this.data.status === 'pending') {
-        this.router.navigate([`/payment/${this._consultationSession}`]).then();
+        this.router.navigate([`/payment/${this._paymentId}`]).then();
       }
     }
   }
@@ -29,15 +29,15 @@ export class ConsultationStatusService extends Collection<IConsultationStatus> {
     return this.api.status(uuid);
   }
 
-  public init(consultationSession: string): void {
-    this._consultationSession = consultationSession;
-    if (consultationSession === environment.magic_uuid) {
+  public init(paymentId: string): void {
+    this._paymentId = paymentId;
+    if (paymentId === environment.magic_uuid) {
       console.log('MAGIC Consultation!');
-      const c = generateMagicConsultationStatus(consultationSession, "paid");
+      const c = generateMagicConsultationStatus(paymentId, "paid");
       this.statusEmit(c);
       return;
     }
-    this.dataSub.push(this.statusData(consultationSession).pipe(filter(d => !!d && !!d.message), tap(d => {
+    this.dataSub.push(this.statusData(paymentId).pipe(filter(d => !!d && !!d.message), tap(d => {
       this.statusEmit(d);
     }), catchError(err => {
       if (err?.error?.status.status === 'not_found') {
@@ -50,7 +50,7 @@ export class ConsultationStatusService extends Collection<IConsultationStatus> {
   destroy(): void {
     fullUnsubscribe(this.dataSub);
     this.data = {} as any;
-    this._consultationSession = '';
+    this._paymentId = '';
   }
 
 

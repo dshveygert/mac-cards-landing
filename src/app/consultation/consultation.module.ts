@@ -17,7 +17,7 @@ import { ExpiredPageComponent } from './pages/expired-page/expired-page.componen
 const components = [ConsultationLayoutPageComponent, ConsultationPageComponent, StepComponent, PreparationPageComponent,
   FormMainQuestionComponent, FinalPageComponent, ThanksPageComponent, ConsultationNavigationMenuComponent, ExpiredPageComponent];
 const routes: Routes = [
-  {path: ':consultationSession', component: ConsultationLayoutPageComponent, children: [
+  {path: ':paymentId', component: ConsultationLayoutPageComponent, children: [
     {path: '', redirectTo: 'preparation', pathMatch: 'full'},
     {path: 'preparation', component: PreparationPageComponent},
     {path: 'cards', component: ConsultationPageComponent},

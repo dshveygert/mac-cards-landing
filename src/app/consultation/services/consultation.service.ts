@@ -2,7 +2,15 @@ import { Injectable } from '@angular/core';
 import {map, Observable, SubscriptionLike} from 'rxjs';
 import {CryptoData, localStorageGetItem, localStorageSetItem} from '../../../utils/localStorage';
 import {Collection} from "../../../utils/collection";
-import {ICard, ICardByStep, IConsultation, ELocalStorage, IStep, IConsultationStorage} from "../../api/models";
+import {
+  ICard,
+  ICardByStep,
+  IConsultation,
+  ELocalStorage,
+  IStep,
+  IConsultationStorage,
+  ECardType
+} from "../../api/models";
 import {fullUnsubscribe} from "../../../utils";
 
 @Injectable({
@@ -10,6 +18,7 @@ import {fullUnsubscribe} from "../../../utils";
 })
 export class ConsultationService extends Collection<IConsultation> {
   private dataSub: SubscriptionLike[] = [];
+  private _paymentId: string;
   private crypto = new CryptoData(ELocalStorage.consultation);
 
   get currentStepId$(): Observable<number> {
@@ -30,8 +39,8 @@ export class ConsultationService extends Collection<IConsultation> {
     return cs[cs.length - 1];
   }
 
-  isStepCompleted(step: IStep): boolean {
-    return this.data?.currentStep?.id >= step.id;
+  get selectedCards(): ICard[] {
+    return this.data?.log.map(c => c.card);
   }
 
   private dataEmit(step: IStep, log?: ICardByStep): void {
@@ -52,26 +61,32 @@ export class ConsultationService extends Collection<IConsultation> {
     localStorageSetItem(ELocalStorage.consultation, JSON.stringify(data), this.crypto);
   }
 
-  nextStepHandler(nextStep: IStep): void {
+  public isStepCompleted(step: IStep): boolean {
+    return this.data?.currentStep?.id >= step.id;
+  }
+
+  public nextStepHandler(nextStep: IStep): void {
     this.dataEmit(nextStep);
   }
 
-  selectedCardHandler(card: ICard): void {
-    this.dataEmit(this.data.currentStep, {step: this.data.currentStep, card});
+  public selectCardHandler(card: ICard, type: ECardType): void {
+    this.dataEmit(this.data.currentStep, {step: this.data.currentStep, card: {...card, type}});
   }
 
-  init(consultationSession: string): void {
-    // @ts-ignore
-    this.data = this.consultations?.hasOwnProperty(consultationSession) ? this.consultations[consultationSession] : {
-      uuid: consultationSession,
-      currentStep: -1,
-      log: []
+  init(paymentId: string): void {
+    this._paymentId = paymentId;
+    this.data = this.consultations?.hasOwnProperty(paymentId) ? this.consultations[paymentId] : {
+      uuid: paymentId,
+      currentStep: {} as IStep,
+      log: [],
+      time: new Date().getTime()
     };
   }
 
   destroy(): void {
     fullUnsubscribe(this.dataSub);
     this.data = {} as IConsultation;
+    this._paymentId = '';
   }
 
   constructor() {

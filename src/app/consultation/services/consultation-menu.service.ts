@@ -6,11 +6,11 @@ import { CryptoData, localStorageGetItem, localStorageSetItem } from "../../../u
 @Injectable()
 export class ConsultationMenuService extends Collection<IConsultationMenu[]> {
   private crypto = new CryptoData(ELocalStorage.consultation_menu);
-  private uuid: string;
+  private _paymentId: string;
 
   private dataEmit(page: TConsultationMenu): void {
     const visited = this.menuByUUID;
-    const index = this.data?.findIndex(item => item.uuid === this.uuid);
+    const index = this.data?.findIndex(item => item.uuid === this._paymentId);
     if (index >= 0 && !this.isPageVisited(page)) {
       const menu = [...this.data[index].menu, page];
       this.data[index] = {...visited, menu};
@@ -19,7 +19,7 @@ export class ConsultationMenuService extends Collection<IConsultationMenu[]> {
   }
 
   get menuByUUID(): IConsultationMenu {
-    return this.data?.find(item => item.uuid === this.uuid) ?? {} as IConsultationMenu;
+    return this.data?.find(item => item.uuid === this._paymentId) ?? {} as IConsultationMenu;
   }
 
   savePage(page: TConsultationMenu): void {
@@ -31,20 +31,20 @@ export class ConsultationMenuService extends Collection<IConsultationMenu[]> {
     return !!visited && visited['menu']?.findIndex(item => item === page) >= 0;
   }
 
-  init(consultationSession: string): void {
-    this.uuid = consultationSession;
+  init(paymentId: string): void {
+    this._paymentId = paymentId;
     const menu = localStorageGetItem(ELocalStorage.consultation_menu, this.crypto);
     if (menu) {
       this.data = JSON.parse(menu);
     }
-    if (this.data.findIndex(item => item.uuid === consultationSession) < 0) {
-      this.data = [...this.data, {uuid: consultationSession, menu: ['preparation']}];
+    if (this.data.findIndex(item => item.uuid === paymentId) < 0) {
+      this.data = [...this.data, {uuid: paymentId, menu: ['preparation']}];
       localStorageSetItem(ELocalStorage.consultation_menu, JSON.stringify(this.data), this.crypto);
     }
   }
 
   destroy(): void {
-    this.uuid = '';
+    this._paymentId = '';
   }
 
   constructor() {

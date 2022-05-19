@@ -16,7 +16,7 @@ export interface ICard {
   img: string;
   name?: string;
   description?: string;
-  selected?: boolean;
+  type?: ECardType;
 }
 
 export interface IStep {

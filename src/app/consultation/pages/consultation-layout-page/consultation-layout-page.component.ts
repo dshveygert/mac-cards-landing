@@ -18,11 +18,11 @@ export class ConsultationLayoutPageComponent implements OnInit, OnDestroy {
   private dataSub: SubscriptionLike[] = [];
   ngOnInit(): void {
     this.steps.init();
-    this.dataSub.push(this.route.params.pipe(tap(({consultationSession}) => {
-      this.consultation.init(consultationSession);
-      this.preparation.init(consultationSession);
-      this.status.init(consultationSession);
-      this.m.init(consultationSession);
+    this.dataSub.push(this.route.params.pipe(tap(({paymentId}) => {
+      this.consultation.init(paymentId);
+      this.preparation.init(paymentId);
+      this.status.init(paymentId);
+      this.m.init(paymentId);
     })).subscribe());
   }
   ngOnDestroy(): void {

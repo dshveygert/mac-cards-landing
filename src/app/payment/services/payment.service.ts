@@ -46,7 +46,7 @@ export class PaymentService extends Collection<IPayment> {
     this.data = data.payment ?? {};
     if (this.data?.status === 'succeeded') {
       const paymentKey: IPaymentLocalData = {
-        key: JSON.parse(localStorageGetItem(ELocalStorage.payment_key, this.crypto) ?? '')?.key === this.key ? this.key : '', // if payment is checking directly from url (not after payment creation)
+        key: JSON.parse(localStorageGetItem(ELocalStorage.payment_key, this.crypto) ?? '{}')?.key === this.key ? this.key : '', // if payment is checking directly from url (not after payment creation)
         paymentId: this.data.id,
         status: this.data?.status
       };
