@@ -11,7 +11,8 @@ export const environment = {
     inn: '000123456789'
   },
   analytics: {
-    ga: ''
+    ga: '',
+    yaMetrika: ''
   },
   api: {
     host: 'https://api.site.com',

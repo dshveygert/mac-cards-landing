@@ -1,10 +1,8 @@
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {environment} from 'src/environments/environment';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-google-analytics';
 import {ApiModule} from './api/api.module';
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "./shared/shared.module";
@@ -13,6 +11,7 @@ import {NavigationComponent} from "./routing/components/navigation/navigation.co
 import {HomePageComponent} from "./home/pages/home-page/home-page.component";
 import {FooterComponent} from "./routing/components/footer/footer.component";
 import {NotFoundPage} from "./routing/components/not-found/not-found.page";
+import {AnalyticsModule} from "./analytics/analytics.module";
 
 const components = [AppComponent, LayoutComponent, NavigationComponent, HomePageComponent, FooterComponent];
 
@@ -43,8 +42,7 @@ const routes: Routes = [
     }),
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxGoogleAnalyticsModule.forRoot(environment.analytics.ga),
-    NgxGoogleAnalyticsRouterModule,
+    AnalyticsModule,
     ApiModule,
     SharedModule
   ],

@@ -1,6 +1,6 @@
 {
   "name": "mac-cards-landing",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -29,6 +29,7 @@
     "angular-svg-icon": "^13.0.0",
     "crypto-js": "^4.1.1",
     "express": "^4.15.2",
+    "ng-yandex-metrika": "^6.0.0",
     "ngx-google-analytics": "^13.0.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
