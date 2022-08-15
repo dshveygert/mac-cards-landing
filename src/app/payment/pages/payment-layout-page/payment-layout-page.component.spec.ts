@@ -8,9 +8,9 @@ describe('PaymentLayoutPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaymentLayoutPageComponent ]
+      declarations: [PaymentLayoutPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

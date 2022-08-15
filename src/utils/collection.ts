@@ -1,5 +1,5 @@
-import {Observable, ReplaySubject} from 'rxjs';
-import {ICollection} from "../app/api/models";
+import { Observable, ReplaySubject } from 'rxjs';
+import { ICollection } from '../app/api/models';
 
 export class Collection<T = any> implements ICollection<T> {
   _data: T;
@@ -18,5 +18,5 @@ export class Collection<T = any> implements ICollection<T> {
     return this._data$;
   }
 
-  public trackByFn = (i: number, item: {id: number}): number => item?.id ?? i;
+  public trackByFn = (i: number, item: { id: number }): number => item?.id ?? i;
 }

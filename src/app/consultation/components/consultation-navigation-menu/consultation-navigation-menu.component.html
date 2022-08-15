@@ -1,14 +1,14 @@
-<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Меню">
+<button mat-icon-button [matMenuTriggerFor]='menu' aria-label='Меню'>
   <mat-icon>more_vert</mat-icon>
 </button>
-<mat-menu #menu="matMenu">
+<mat-menu #menu='matMenu'>
   <button mat-menu-item>
-    <span routerLink="preparation">Формулировка запроса</span>
+    <span routerLink='preparation'>Формулировка запроса</span>
   </button>
   <button mat-menu-item [disabled]="!m.isPageVisited('cards')">
-    <span routerLink="cards">Экспресс-консультация</span>
+    <span routerLink='cards'>Экспресс-консультация</span>
   </button>
   <button mat-menu-item [disabled]="!m.isPageVisited('final')">
-    <span routerLink="final">Подведение итогов</span>
+    <span routerLink='final'>Подведение итогов</span>
   </button>
 </mat-menu>

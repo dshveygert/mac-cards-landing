@@ -1,10 +1,10 @@
-import {AfterViewInit, Component} from '@angular/core';
-import {PaymentService} from "../../services/payment.service";
+import { AfterViewInit, Component } from '@angular/core';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-payment-page',
   templateUrl: './payment-page.component.html',
-  styleUrls: ['./payment-page.component.sass']
+  styleUrls: ['./payment-page.component.sass'],
 })
 export class PaymentPageComponent implements AfterViewInit {
 
@@ -13,6 +13,7 @@ export class PaymentPageComponent implements AfterViewInit {
     setTimeout(() => this.payment.init(), 2000);
   }
 
-  constructor(private payment: PaymentService) { }
+  constructor(private payment: PaymentService) {
+  }
 
 }

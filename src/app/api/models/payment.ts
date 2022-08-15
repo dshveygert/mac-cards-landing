@@ -1,4 +1,4 @@
-import {IDefaultResponse} from "./content";
+import { IDefaultResponse } from './content';
 
 export interface IPaymentResponse extends IDefaultResponse {
   payment: IPayment;

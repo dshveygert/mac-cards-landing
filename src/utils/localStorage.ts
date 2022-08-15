@@ -1,9 +1,9 @@
-import {AES, enc, SHA256, lib} from 'crypto-js';
-import {environment} from "../environments/environment";
+import { AES, enc, SHA256, lib } from 'crypto-js';
+import { environment } from '../environments/environment';
 
 export function localStorageGetItem(key: string, crypto: CryptoData): string | null {
   try {
-    return environment.production ? crypto.decrypt(localStorage.getItem(key)): localStorage.getItem(key);
+    return environment.production ? crypto.decrypt(localStorage.getItem(key)) : localStorage.getItem(key);
   } catch (e: any) {
     if (e.name === 'NS_ERROR_FILE_CORRUPTED') {
       localStorage.removeItem(key);
@@ -39,13 +39,14 @@ export class CryptoData {
   }
 
   private generateKey(salt: string): string {
-    const {language, appName} = window.navigator ?? {};
+    const { language, appName } = window.navigator ?? {};
     const key = [language, appName, salt].join('');
     return SHA256(key).toString();
   }
 
   private bytes = (data: string): lib.WordArray => AES.decrypt(data.trim(), this.secretKey);
   encrypt = (data: any): string => AES.encrypt(JSON.stringify(data), this.secretKey).toString();
+
   decrypt<T>(data: string | null): T {
     try {
       return typeof data === 'string' && JSON.parse(this.bytes(data).toString(enc.Utf8));

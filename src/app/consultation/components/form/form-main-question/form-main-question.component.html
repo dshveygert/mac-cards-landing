@@ -1,11 +1,11 @@
 <form [formGroup]='formGroup' (ngSubmit)='submitForm()'>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance='fill'>
     <mat-label>{{placeholder}}</mat-label>
     <textarea matInput formControlName='answer'></textarea>
   </mat-form-field>
-  <ng-container *ngIf="!!submitButtonText">
-    <div class="button-wrapper">
-      <button mat-button type="submit" class="cards-button upper" [disabled]="isDisabled">Продолжить</button>
+  <ng-container *ngIf='!!submitButtonText'>
+    <div class='button-wrapper'>
+      <button mat-button type='submit' class='cards-button upper' [disabled]='isDisabled'>Продолжить</button>
     </div>
   </ng-container>
 </form>

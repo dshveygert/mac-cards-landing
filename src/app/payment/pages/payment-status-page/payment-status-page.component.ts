@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {SubscriptionLike, interval, switchMap, ReplaySubject, Observable, startWith, of, take, map} from "rxjs";
-import {fullUnsubscribe} from "../../../../utils";
-import {PaymentService} from "../../services/payment.service";
-import {environment} from "../../../../environments/environment";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { SubscriptionLike, interval, switchMap, ReplaySubject, Observable, startWith, of, take, map } from 'rxjs';
+import { fullUnsubscribe } from '../../../../utils';
+import { PaymentService } from '../../services/payment.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-payment-status-page',
   templateUrl: './payment-status-page.component.html',
-  styleUrls: ['./payment-status-page.component.sass']
+  styleUrls: ['./payment-status-page.component.sass'],
 })
 export class PaymentStatusPageComponent implements OnInit, OnDestroy {
   private dataSub: SubscriptionLike[] = [];
@@ -19,6 +19,7 @@ export class PaymentStatusPageComponent implements OnInit, OnDestroy {
   get counter$(): Observable<number> {
     return this._counter$.pipe(startWith(this._counter));
   }
+
   set counter(n: number) {
     this._counter = n;
     this._counter$.next(this._counter);
@@ -37,7 +38,7 @@ export class PaymentStatusPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.dataSub.push(this.route.params.pipe(switchMap(({paymentId}) => {
+    this.dataSub.push(this.route.params.pipe(switchMap(({ paymentId }) => {
       this._paymentID = paymentId;
       return this.payment.checkPaymentStatus(paymentId);
     }), switchMap(() => {
@@ -58,6 +59,7 @@ export class PaymentStatusPageComponent implements OnInit, OnDestroy {
     fullUnsubscribe(this.dataSub);
   }
 
-  constructor(private route: ActivatedRoute, public payment: PaymentService) { }
+  constructor(private route: ActivatedRoute, public payment: PaymentService) {
+  }
 
 }

@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable, SubscriptionLike, tap} from 'rxjs';
-import {IStep} from '../../api/models';
-import {fullUnsubscribe} from '../../../utils';
-import {Collection} from "../../../utils/collection";
-import {SettingsService} from "../../routing/services/settings.service";
+import { Observable, SubscriptionLike, tap } from 'rxjs';
+import { IStep } from '../../api/models';
+import { fullUnsubscribe } from '../../../utils';
+import { Collection } from '../../../utils/collection';
+import { SettingsService } from '../../routing/services/settings.service';
 
 @Injectable()
 export class StepsListService extends Collection<IStep[]> {
   private dataSub: SubscriptionLike[] = [];
   private fileName = 'steps.json';
 
-  private dataRequest = (): Observable<IStep[]> =>  {
+  private dataRequest = (): Observable<IStep[]> => {
     return this.http.get<IStep[]>(`${this.settings.contentPath}/${this.fileName}`);
-  }
+  };
 
   nextStep(currentStepId: number): IStep {
     const nextId = currentStepId + 1;

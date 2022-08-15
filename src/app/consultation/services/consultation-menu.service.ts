@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Collection } from "../../../utils/collection";
-import { ELocalStorage, IConsultationMenu, TConsultationMenu } from "../../api/models";
-import { CryptoData, localStorageGetItem, localStorageSetItem } from "../../../utils/localStorage";
+import { Collection } from '../../../utils/collection';
+import { ELocalStorage, IConsultationMenu, TConsultationMenu } from '../../api/models';
+import { CryptoData, localStorageGetItem, localStorageSetItem } from '../../../utils/localStorage';
 
 @Injectable()
 export class ConsultationMenuService extends Collection<IConsultationMenu[]> {
@@ -13,7 +13,7 @@ export class ConsultationMenuService extends Collection<IConsultationMenu[]> {
     const index = this.data?.findIndex(item => item.uuid === this._paymentId);
     if (index >= 0 && !this.isPageVisited(page)) {
       const menu = [...this.data[index].menu, page];
-      this.data[index] = {...visited, menu};
+      this.data[index] = { ...visited, menu };
       localStorageSetItem(ELocalStorage.consultation_menu, JSON.stringify(this.data), this.crypto);
     }
   }
@@ -38,7 +38,7 @@ export class ConsultationMenuService extends Collection<IConsultationMenu[]> {
       this.data = JSON.parse(menu);
     }
     if (this.data.findIndex(item => item.uuid === paymentId) < 0) {
-      this.data = [...this.data, {uuid: paymentId, menu: ['preparation']}];
+      this.data = [...this.data, { uuid: paymentId, menu: ['preparation'] }];
       localStorageSetItem(ELocalStorage.consultation_menu, JSON.stringify(this.data), this.crypto);
     }
   }

@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Params } from '@angular/router';
-import {debounceTime, Subject, SubscriptionLike, tap } from 'rxjs';
+import { debounceTime, Subject, SubscriptionLike, tap } from 'rxjs';
 import { formGroupStatusChanges, formGroupTrim, formGroupValidate, fullUnsubscribe } from 'src/utils';
-import {PreparationService} from "../../../services/preparation.service";
-import {IPreparationAnswer} from "../../../../api/models";
+import { PreparationService } from '../../../services/preparation.service';
+import { IPreparationAnswer } from '../../../../api/models';
 
 @Component({
   selector: 'app-form-main-question',
   templateUrl: './form-main-question.component.html',
   styleUrls: ['./form-main-question.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormMainQuestionComponent implements OnInit, OnDestroy {
   @Input() placeholder = 'Запишите ответ на этот вопрос';
@@ -19,7 +19,7 @@ export class FormMainQuestionComponent implements OnInit, OnDestroy {
   @Output() formSubmit = new EventEmitter<IPreparationAnswer>();
   public formGroup: FormGroup;
   public formErrors: { [name: string]: Subject<string[]> } = {
-    answer: new Subject<string[]>()
+    answer: new Subject<string[]>(),
   };
   public error: any;
   private dataSub: SubscriptionLike[] = [];
@@ -32,13 +32,13 @@ export class FormMainQuestionComponent implements OnInit, OnDestroy {
 
   get errorsList(): Params {
     return {
-      maxLength: 'Сформулируйте ответ покороче'
+      maxLength: 'Сформулируйте ответ покороче',
     };
   }
 
   get answerPreparation(): IPreparationAnswer {
-    const {answer} = this.formGroup.value;
-    return {value: answer, form_code: this.formCode};
+    const { answer } = this.formGroup.value;
+    return { value: answer, form_code: this.formCode };
   }
 
   submitForm(): void {
@@ -51,9 +51,9 @@ export class FormMainQuestionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const validators = !!this.submitButtonText ? [Validators.required] : []
+    const validators = !!this.submitButtonText ? [Validators.required] : [];
     this.formGroup = this.fb.group({
-      answer: [null, [...validators, Validators.maxLength(500)]]
+      answer: [null, [...validators, Validators.maxLength(500)]],
     });
 
     this.validationSub.push(formGroupStatusChanges(this.formGroup, this.formErrors, this.errorsList));

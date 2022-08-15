@@ -1,73 +1,91 @@
-<div class="content-wrapper">
-  <div class="title">
+<div class='content-wrapper'>
+  <div class='title'>
     <h2>Формулировка запроса.</h2>
-    <p>Важный шаг в любой консультации – это определиться с актуальной темой (целью, запросом), с которой Вы хотите поработать или Вам важно поисследовать сейчас.</p>
+    <p>Важный шаг в любой консультации – это определиться с актуальной темой (целью, запросом), с которой Вы хотите
+      поработать или Вам важно поисследовать сейчас.</p>
   </div>
 
-  <div class="divider"></div>
+  <div class='divider'></div>
 
-  <div class="content-block">
+  <div class='content-block'>
     <h3>Почему важно понять свою истинную цель?</h3>
     <p>Чтобы достигнуть результата.</p>
     <p>Если цель размытая, нечеткая и непонятная, то и результат будет такой же или его не будет вообще.</p>
   </div>
 </div>
 
-<div class="content-block--white">
-  <div class="card-img hands"></div>
+<div class='content-block--white'>
+  <div class='card-img hands'></div>
 </div>
 
-<div class="content-wrapper">
+<div class='content-wrapper'>
 
-  <div class="divider"></div>
+  <div class='divider'></div>
 
-  <div class="content-block">
-    <h3><mark>0/4</mark> - С какой темой (целью, запросом) для себя хотите поработать?</h3>
-    <app-form-main-question formCode="main-question-form"></app-form-main-question>
+  <div class='content-block'>
+    <h3>
+      <mark>0/4</mark>
+      - С какой темой (целью, запросом) для себя хотите поработать?
+    </h3>
+    <app-form-main-question formCode='main-question-form'></app-form-main-question>
 
     <p>Прошу Вас ответить на первый уточняющий вопрос:</p>
 
-    <h3><mark>1/4</mark> - Почему сейчас важно это рассмотреть?</h3>
-    <app-form-main-question formCode="1-question-form"></app-form-main-question>
+    <h3>
+      <mark>1/4</mark>
+      - Почему сейчас важно это рассмотреть?
+    </h3>
+    <app-form-main-question formCode='1-question-form'></app-form-main-question>
 
     <p>Прошу Вас ответить на второй уточняющий вопрос:</p>
 
-    <h3><mark>2/4</mark> - Что для Вас будет наилучшим результатом экспресс-консультации с помощью МАКарт?</h3>
-    <app-form-main-question formCode="2-question-form"></app-form-main-question>
+    <h3>
+      <mark>2/4</mark>
+      - Что для Вас будет наилучшим результатом экспресс-консультации с помощью МАКарт?
+    </h3>
+    <app-form-main-question formCode='2-question-form'></app-form-main-question>
 
     <p>Прошу Вас ответить на третий уточняющий вопрос:</p>
 
-    <h3><mark>3/4</mark> - Как Вы поймете, что достигли того, чего хотите? Как Вы будете себя чувствовать?</h3>
-    <app-form-main-question formCode="3-question-form"></app-form-main-question>
+    <h3>
+      <mark>3/4</mark>
+      - Как Вы поймете, что достигли того, чего хотите? Как Вы будете себя чувствовать?
+    </h3>
+    <app-form-main-question formCode='3-question-form'></app-form-main-question>
   </div>
 
 
-  <div class="divider"></div>
+  <div class='divider'></div>
 
 </div>
 
-<div class="content-block--white">
-  <div class="card-img elephants"></div>
+<div class='content-block--white'>
+  <div class='card-img elephants'></div>
 </div>
 
-<div class="content-wrapper">
+<div class='content-wrapper'>
 
-  <div class="divider"></div>
+  <div class='divider'></div>
 
-  <div class="content-block">
-    <p>После небольшого совместного исследования интересующей Вас темы (цели, запроса), я попрошу Вас сформулировать актуальную тему (цель, запрос) для работы на экспресс-консультации с помощью МАКарт, объединив все важные моменты, прояснившиеся в ходе работы с запросом.</p>
+  <div class='content-block'>
+    <p>После небольшого совместного исследования интересующей Вас темы (цели, запроса), я попрошу Вас сформулировать
+      актуальную тему (цель, запрос) для работы на экспресс-консультации с помощью МАКарт, объединив все важные моменты,
+      прояснившиеся в ходе работы с запросом.</p>
 
-    <h3><mark>4/4</mark> - Моя тема для проработки:</h3>
+    <h3>
+      <mark>4/4</mark>
+      - Моя тема для проработки:
+    </h3>
     <app-form-main-question
-      (formSubmit)="goToSteps($event)"
-      formCode="final-question-form"
-      placeholder="Сформулируйте свою тему для проработки и запишите"
-      submitButtonText="Продолжить">
+      (formSubmit)='goToSteps($event)'
+      formCode='final-question-form'
+      placeholder='Сформулируйте свою тему для проработки и запишите'
+      submitButtonText='Продолжить'>
     </app-form-main-question>
   </div>
 
 
-  <div class="divider"></div>
+  <div class='divider'></div>
 
 </div>
 

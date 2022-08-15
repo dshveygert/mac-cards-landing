@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import {map, Observable, SubscriptionLike, take} from 'rxjs';
-import {CryptoData, localStorageGetItem, localStorageSetItem} from '../../../utils/localStorage';
-import {Collection} from "../../../utils/collection";
-import {IPreparation, ELocalStorage, IPreparationAnswer, TAnswerType} from "../../api/models";
-import {fullUnsubscribe} from "../../../utils";
-import {SaveAnswersService} from "../../shared/services/save-answers.service";
-import {PaymentService} from "../../payment/services/payment.service";
+import { map, Observable, SubscriptionLike, take } from 'rxjs';
+import { CryptoData, localStorageGetItem, localStorageSetItem } from '../../../utils/localStorage';
+import { Collection } from '../../../utils/collection';
+import { IPreparation, ELocalStorage, IPreparationAnswer, TAnswerType } from '../../api/models';
+import { fullUnsubscribe } from '../../../utils';
+import { SaveAnswersService } from '../../shared/services/save-answers.service';
+import { PaymentService } from '../../payment/services/payment.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PreparationService extends Collection<IPreparation[]> {
   private dataSub: SubscriptionLike[] = [];
@@ -18,7 +18,7 @@ export class PreparationService extends Collection<IPreparation[]> {
   private dataEmit(answer: IPreparationAnswer): void {
     const preparation: IPreparation = {
       uuid: this._paymentId,
-      answer
+      answer,
     };
     const index = this.data?.findIndex(item => item.uuid === this._paymentId && item.answer?.form_code === answer.form_code);
     if (index >= 0) {

@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {SubscriptionLike, tap} from "rxjs";
-import {fullUnsubscribe} from "../../../../utils";
-import {PaymentService} from "../../services/payment.service";
+import { ActivatedRoute, Router } from '@angular/router';
+import { SubscriptionLike, tap } from 'rxjs';
+import { fullUnsubscribe } from '../../../../utils';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-payment-back-page',
   templateUrl: './payment-back-page.component.html',
-  styleUrls: ['./payment-back-page.component.sass']
+  styleUrls: ['./payment-back-page.component.sass'],
 })
 export class PaymentBackPageComponent implements OnInit {
   private dataSub: SubscriptionLike[] = [];
 
   ngOnInit(): void {
-    this.dataSub.push(this.route.params.pipe(tap(({paymentKey}) => {
+    this.dataSub.push(this.route.params.pipe(tap(({ paymentKey }) => {
       if (!!paymentKey && paymentKey === this.payment.pendingPayment?.key) {
         this.router.navigate([`/payment/${this.payment.pendingPayment.paymentId}`]).then();
         this.payment.clearPendingPayment();
@@ -27,6 +27,7 @@ export class PaymentBackPageComponent implements OnInit {
     fullUnsubscribe(this.dataSub);
   }
 
-  constructor(private route: ActivatedRoute, private payment: PaymentService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private payment: PaymentService, private router: Router) {
+  }
 
 }

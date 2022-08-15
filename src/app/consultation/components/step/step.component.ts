@@ -1,12 +1,12 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ICard, IStep} from 'src/app/api/models';
-import {CardsListService} from "../../../shared/services/cards-list.service";
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ICard, IStep } from 'src/app/api/models';
+import { CardsListService } from '../../../shared/services/cards-list.service';
 
 @Component({
   selector: 'app-step',
   templateUrl: './step.component.html',
   styleUrls: ['./step.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepComponent implements AfterViewInit {
   @Input() step: IStep;
@@ -17,7 +17,7 @@ export class StepComponent implements AfterViewInit {
   @Output() scrollToStep = new EventEmitter();
 
   get cardImage(): string {
-    const {img} = this.card;
+    const { img } = this.card;
     return `${this.cards.cardImagePath}/${this.step.card_type}/${img ? img : 'empty.png'}`;
   }
 
@@ -51,6 +51,7 @@ export class StepComponent implements AfterViewInit {
     }
   }
 
-  constructor(private cards: CardsListService) { }
+  constructor(private cards: CardsListService) {
+  }
 
 }

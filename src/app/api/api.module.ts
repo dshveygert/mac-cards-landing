@@ -6,7 +6,7 @@ const api = [PaymentApi, ConsultationApi];
 
 @NgModule({
   imports: [HttpClientModule],
-  providers: [...api]
+  providers: [...api],
 })
 export class ApiModule {
 }

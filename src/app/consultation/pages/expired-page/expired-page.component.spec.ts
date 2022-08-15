@@ -8,9 +8,9 @@ describe('ExpiredPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExpiredPageComponent ]
+      declarations: [ExpiredPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

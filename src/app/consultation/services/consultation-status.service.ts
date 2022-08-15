@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {catchError, filter, Observable, of, SubscriptionLike, tap} from 'rxjs';
-import {fullUnsubscribe, generateMagicConsultationStatus} from '../../../utils';
-import {Collection} from "../../../utils/collection";
-import {SettingsService} from "../../routing/services/settings.service";
-import {ConsultationApi} from "../../api/methods";
-import {IConsultationResponse, IConsultationStatus} from "../../api/models";
-import {Router} from "@angular/router";
-import {environment} from "../../../environments/environment";
+import { catchError, filter, Observable, of, SubscriptionLike, tap } from 'rxjs';
+import { fullUnsubscribe, generateMagicConsultationStatus } from '../../../utils';
+import { Collection } from '../../../utils/collection';
+import { SettingsService } from '../../routing/services/settings.service';
+import { ConsultationApi } from '../../api/methods';
+import { IConsultationResponse, IConsultationStatus } from '../../api/models';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ConsultationStatusService extends Collection<IConsultationStatus> {
@@ -25,15 +25,15 @@ export class ConsultationStatusService extends Collection<IConsultationStatus> {
     }
   }
 
-  public statusData = (uuid: string): Observable<IConsultationResponse> =>  {
+  public statusData = (uuid: string): Observable<IConsultationResponse> => {
     return this.api.status(uuid);
-  }
+  };
 
   public init(paymentId: string): void {
     this._paymentId = paymentId;
     if (paymentId === environment.magic_uuid) {
       console.log('MAGIC Consultation!');
-      const c = generateMagicConsultationStatus(paymentId, "paid");
+      const c = generateMagicConsultationStatus(paymentId, 'paid');
       this.statusEmit(c);
       return;
     }

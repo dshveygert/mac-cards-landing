@@ -8,9 +8,9 @@ describe('ConsultationLayoutPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConsultationLayoutPageComponent ]
+      declarations: [ConsultationLayoutPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

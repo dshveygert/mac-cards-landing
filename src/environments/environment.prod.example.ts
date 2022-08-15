@@ -4,20 +4,20 @@ export const environment = {
   feedback: {
     email: 'feedback@site.com',
     telegram: '@telegram',
-    whatsapp: '+12345678900'
+    whatsapp: '+12345678900',
   },
   terms: {
     administrator: 'John Doe',
-    inn: '000123456789'
+    inn: '000123456789',
   },
   analytics: {
     ga: '',
-    yaMetrika: ''
+    yaMetrika: '',
   },
   api: {
     host: 'https://api.site.com',
     payment_create_period: 60000,
     payment_status_pending: 5000,
-    payment_status_attempts: 10
-  }
+    payment_status_attempts: 10,
+  },
 };

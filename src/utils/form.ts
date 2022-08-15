@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { Params } from '@angular/router';
-import {debounceTime, Subject, SubscriptionLike, tap } from 'rxjs';
+import { debounceTime, Subject, SubscriptionLike, tap } from 'rxjs';
 
 export function formGroupValidate(formGroup: FormGroup): void {
   for (const item in formGroup.controls) {
@@ -14,7 +14,7 @@ export function formGroupValidate(formGroup: FormGroup): void {
 export function formGroupTrim(formGroup: FormGroup): void {
   for (const item in formGroup.controls) {
     if (formGroup.controls.hasOwnProperty(item)) {
-      const {value} = formGroup.controls[item];
+      const { value } = formGroup.controls[item];
       if (typeof value === 'string') {
         formGroup.controls[item].setValue((value as string)?.trim());
       }

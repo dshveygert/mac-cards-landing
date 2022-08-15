@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {PaymentService} from "../../payment/services/payment.service";
-import {localStorageGetItem} from "../../../utils/localStorage";
-import {ELocalStorage} from "../../api/models";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { PaymentService } from '../../payment/services/payment.service';
+import { localStorageGetItem } from '../../../utils/localStorage';
+import { ELocalStorage } from '../../api/models';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class IsPaidGuard implements CanActivate {
   private hasPaidMarker(): boolean {
     if (!localStorage.getItem(ELocalStorage.payment_key)) {

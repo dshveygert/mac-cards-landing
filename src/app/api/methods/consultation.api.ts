@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { IConsultationResponse, IDefaultResponse } from "../models";
+import { IConsultationResponse, IDefaultResponse } from '../models';
 
 @Injectable()
 export class ConsultationApi {

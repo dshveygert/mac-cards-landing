@@ -8,9 +8,9 @@ describe('PreparationPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PreparationPageComponent ]
+      declarations: [PreparationPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

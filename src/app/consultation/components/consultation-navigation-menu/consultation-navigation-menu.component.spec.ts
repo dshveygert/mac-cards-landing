@@ -8,9 +8,9 @@ describe('ConsultationNavigationMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConsultationNavigationMenuComponent ]
+      declarations: [ConsultationNavigationMenuComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

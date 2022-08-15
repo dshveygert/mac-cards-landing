@@ -8,9 +8,9 @@ describe('FinalPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FinalPageComponent ]
+      declarations: [FinalPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

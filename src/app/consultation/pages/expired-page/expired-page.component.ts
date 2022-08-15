@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import { Router } from "@angular/router";
-import {GoogleAnalyticsService} from "ngx-google-analytics";
-import {ConsultationService} from "../../services/consultation.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { ConsultationService } from '../../services/consultation.service';
 
 @Component({
   selector: 'app-expired-page',
   templateUrl: './expired-page.component.html',
-  styleUrls: ['./expired-page.component.sass']
+  styleUrls: ['./expired-page.component.sass'],
 })
 export class ExpiredPageComponent implements OnInit {
   private gaCategory = 'expired_page';
@@ -24,5 +24,6 @@ export class ExpiredPageComponent implements OnInit {
     this.ga.event('see_expired_consultation', this.gaCategory, this.consultation.uuid);
   }
 
-  constructor(private router: Router, private ga: GoogleAnalyticsService, private consultation: ConsultationService) { }
+  constructor(private router: Router, private ga: GoogleAnalyticsService, private consultation: ConsultationService) {
+  }
 }

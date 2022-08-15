@@ -1,5 +1,5 @@
-import {IConsultationResponse, IPaymentResponse, TConsultationStatus, TPaymentStatus} from "../app/api/models";
-import {environment} from "../environments/environment";
+import { IConsultationResponse, IPaymentResponse, TConsultationStatus, TPaymentStatus } from '../app/api/models';
+import { environment } from '../environments/environment';
 
 export function generateMagicPayment(paymentId: string, status: TPaymentStatus = 'pending'): IPaymentResponse {
   return {
@@ -10,14 +10,14 @@ export function generateMagicPayment(paymentId: string, status: TPaymentStatus =
       status,
       amount: {
         value: `${environment.price.one_time}.00`,
-        currency: 'RUB'
+        currency: 'RUB',
       },
       description: 'Magic payment',
       created_at: nowTime('iso'),
       test: true,
-      paid: status === 'succeeded'
+      paid: status === 'succeeded',
     },
-  }
+  };
 }
 
 export function generateMagicConsultationStatus(paymentId: string, status: TConsultationStatus = 'pending'): IConsultationResponse {
@@ -31,9 +31,9 @@ export function generateMagicConsultationStatus(paymentId: string, status: TCons
       captured_at: nowTime('iso', captured_at),
       created_at: nowTime('iso', created_at),
       status,
-      test: true
+      test: true,
     },
-  }
+  };
 }
 
 export function nowTime(format: 'iso' | 'unix' | 'custom' = 'custom', date = new Date()): string {
@@ -44,9 +44,9 @@ export function nowTime(format: 'iso' | 'unix' | 'custom' = 'custom', date = new
   const s = addZeroToNumber(date.getSeconds());
 
   switch (format) {
-    case "iso":
+    case 'iso':
       return `${date.getFullYear()}-${month}-${day}T${h}:${m}:${s}.000Z`;
-    case "unix":
+    case 'unix':
       return `${date.getTime()}`;
     default:
       return `${date.getFullYear()}-${month}-${day} ${h}:${m}:${s}`;

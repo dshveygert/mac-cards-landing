@@ -1,17 +1,17 @@
-<div class="content-wrapper">
-  <div class="title">
+<div class='content-wrapper'>
+  <div class='title'>
     <h2>Проверяем статус оплаты<span>...</span></h2>
   </div>
-  <ng-container *ngIf="counter$|async as c">
-    <div class="content-block">
+  <ng-container *ngIf='counter$|async as c'>
+    <div class='content-block'>
       <p>Попытка {{c}} из {{afterAttempts + 1}}</p>
-      <ng-container *ngIf="isPending$|async">
-        <div class="button-wrapper" *ngIf="c > 4 && c < afterAttempts && isPending$|async">
-          <button mat-raised-button class="cards-button upper" (click)="pay()">Открыть страницу оплаты</button>
+      <ng-container *ngIf='isPending$|async'>
+        <div class='button-wrapper' *ngIf='c > 4 && c < afterAttempts && isPending$|async'>
+          <button mat-raised-button class='cards-button upper' (click)='pay()'>Открыть страницу оплаты</button>
         </div>
       </ng-container>
-      <div class="button-wrapper" *ngIf="c >= afterAttempts">
-        <button mat-button class="cards-button upper" routerLink="/payment">Попробовать снова</button>
+      <div class='button-wrapper' *ngIf='c >= afterAttempts'>
+        <button mat-button class='cards-button upper' routerLink='/payment'>Попробовать снова</button>
       </div>
     </div>
   </ng-container>

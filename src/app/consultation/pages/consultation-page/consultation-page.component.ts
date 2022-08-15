@@ -1,20 +1,20 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
-import {ConsultationService} from "../../services/consultation.service";
-import {StepsListService} from "../../services/steps-list.service";
-import {combineLatest, map, Observable} from "rxjs";
-import {ECardType, ICard, IStep} from "../../../api/models";
-import {CardsListService} from "../../../shared/services/cards-list.service";
-import {SettingsService} from "../../../routing/services/settings.service";
-import {PreparationService} from "../../services/preparation.service";
-import {Router} from "@angular/router";
-import {ConsultationMenuService} from "../../services/consultation-menu.service";
-import {GoogleAnalyticsService} from "ngx-google-analytics";
+import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core';
+import { ConsultationService } from '../../services/consultation.service';
+import { StepsListService } from '../../services/steps-list.service';
+import { combineLatest, map, Observable } from 'rxjs';
+import { ECardType, ICard, IStep } from '../../../api/models';
+import { CardsListService } from '../../../shared/services/cards-list.service';
+import { SettingsService } from '../../../routing/services/settings.service';
+import { PreparationService } from '../../services/preparation.service';
+import { Router } from '@angular/router';
+import { ConsultationMenuService } from '../../services/consultation-menu.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-consultation-page',
   templateUrl: './consultation-page.component.html',
   styleUrls: ['./consultation-page.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConsultationPageComponent implements AfterViewInit {
   private gaCategory = 'consultation_page';
@@ -64,5 +64,6 @@ export class ConsultationPageComponent implements AfterViewInit {
   constructor(public consultation: ConsultationService, public steps: StepsListService,
               public cards: CardsListService, private settings: SettingsService, private ga: GoogleAnalyticsService,
               private preparation: PreparationService, private router: Router,
-              private m: ConsultationMenuService) { }
+              private m: ConsultationMenuService) {
+  }
 }

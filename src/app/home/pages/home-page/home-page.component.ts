@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { Router } from "@angular/router";
-import { environment } from "../../../../environments/environment";
-import { SubscriptionLike } from "rxjs";
-import { fullUnsubscribe } from "../../../../utils";
-import { ConsultationService } from "../../../consultation/services/consultation.service";
-import { GoogleAnalyticsService } from "ngx-google-analytics";
+import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
+import { SubscriptionLike } from 'rxjs';
+import { fullUnsubscribe } from '../../../../utils';
+import { ConsultationService } from '../../../consultation/services/consultation.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePageComponent implements OnDestroy {
   private dataSub: SubscriptionLike[] = [];
@@ -52,5 +52,6 @@ export class HomePageComponent implements OnDestroy {
     fullUnsubscribe(this.dataSub);
   }
 
-  constructor(private router: Router, private consultation: ConsultationService, private ga: GoogleAnalyticsService) { }
+  constructor(private router: Router, private consultation: ConsultationService, private ga: GoogleAnalyticsService) {
+  }
 }

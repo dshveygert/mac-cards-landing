@@ -1,4 +1,4 @@
-import {SubscriptionLike} from 'rxjs';
+import { SubscriptionLike } from 'rxjs';
 
 export function fullUnsubscribe(list: SubscriptionLike[]): void {
   let i = list.length;

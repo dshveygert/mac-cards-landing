@@ -8,9 +8,9 @@ describe('PaymentBackPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaymentBackPageComponent ]
+      declarations: [PaymentBackPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

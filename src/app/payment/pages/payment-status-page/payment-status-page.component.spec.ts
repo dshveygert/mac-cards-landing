@@ -8,9 +8,9 @@ describe('PaymentStatusPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaymentStatusPageComponent ]
+      declarations: [PaymentStatusPageComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

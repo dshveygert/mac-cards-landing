@@ -1,16 +1,16 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component} from '@angular/core';
-import {Router} from "@angular/router";
-import {SettingsService} from "../../../routing/services/settings.service";
-import {ConsultationMenuService} from "../../services/consultation-menu.service";
-import {ConsultationService} from "../../services/consultation.service";
-import {PreparationService} from "../../services/preparation.service";
-import {GoogleAnalyticsService} from "ngx-google-analytics";
+import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { SettingsService } from '../../../routing/services/settings.service';
+import { ConsultationMenuService } from '../../services/consultation-menu.service';
+import { ConsultationService } from '../../services/consultation.service';
+import { PreparationService } from '../../services/preparation.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-preparation-page',
   templateUrl: './preparation-page.component.html',
   styleUrls: ['./preparation-page.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PreparationPageComponent implements AfterViewInit {
   private gaCategory = 'preparation_page';
@@ -28,5 +28,6 @@ export class PreparationPageComponent implements AfterViewInit {
 
   constructor(private settings: SettingsService, private router: Router, private consultation: ConsultationService,
               private m: ConsultationMenuService, private preparation: PreparationService,
-              private ga: GoogleAnalyticsService) { }
+              private ga: GoogleAnalyticsService) {
+  }
 }

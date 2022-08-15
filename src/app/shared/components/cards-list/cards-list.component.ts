@@ -1,12 +1,12 @@
-import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {ECardType, ICard} from "../../../api/models";
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ECardType, ICard } from '../../../api/models';
 
 @Component({
   selector: 'app-cards-list',
   templateUrl: './cards-list.component.html',
   styleUrls: ['./cards-list.component.sass'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsListComponent implements OnInit {
   item: ICard;
@@ -29,7 +29,7 @@ export class CardsListComponent implements OnInit {
   }
 
   cardImage(item: ICard): string {
-    const {img} = item;
+    const { img } = item;
     const cardImg = this.viewCard ? img ? img : 'empty.png' : `downFace_${this.cardType}.svg`;
     return `${this.data.cardImagePath}/${this.cardType}/${cardImg}`;
   }
@@ -53,5 +53,6 @@ export class CardsListComponent implements OnInit {
     viewCard: boolean;
     cardImagePath: string;
     selectCard: (item: ICard, type: ECardType) => void
-  }, private dialogRef: MatDialogRef<CardsListComponent>) { }
+  }, private dialogRef: MatDialogRef<CardsListComponent>) {
+  }
 }
